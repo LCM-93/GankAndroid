@@ -68,10 +68,10 @@ public class SplashActivity extends MvpActivity<SplashPresenter> implements Spla
         mPresenter.getSplash();
 
         Observable.interval(0, 1000, TimeUnit.MILLISECONDS)
-                .take(4)
+                .take(5)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aLong -> tvTime.setText(String.valueOf(4 - aLong)),
+                .subscribe(aLong -> tvTime.setText(String.valueOf(5 - aLong)),
                         throwable -> throwable.printStackTrace(),
                         () -> {
                             startActivity(new Intent(SplashActivity.this, MainActivity.class));
