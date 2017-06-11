@@ -1,7 +1,7 @@
 package com.lcm.app.dagger.component;
 
 import com.lcm.android.dagger.scope.ActivityScope;
-import com.lcm.app.main.MainActivity;
+import com.lcm.app.ui.main.MainActivity;
 import com.lcm.app.ui.splash.SplashActivity;
 
 import dagger.Component;

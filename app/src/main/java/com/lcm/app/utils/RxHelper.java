@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 public class RxHelper {
 
     public static <T> ObservableTransformer<T, T> rxSchedulerHelper() {
-        return tObservable -> tObservable.subscribeOn(Schedulers.newThread())
+        return tObservable -> tObservable.subscribeOn(Schedulers.io())
                 .unsubscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -33,8 +33,12 @@ public class RxHelper {
 
     private static <T> Observable<T> createData(T data) {
         return Observable.create(e -> {
-            e.onNext(data);
-            e.onComplete();
+            try {
+                e.onNext(data);
+                e.onComplete();
+            } catch (Exception e1) {
+                e.onError(e1);
+            }
         });
     }
 }

@@ -1,7 +1,6 @@
-package com.lcm.app.main;
+package com.lcm.app.ui.main;
 
 import com.lcm.android.mvp.BaseView;
-import com.lcm.app.data.entity.BannerBean;
 
 /**
  * ****************************************************************
@@ -13,5 +12,4 @@ import com.lcm.app.data.entity.BannerBean;
 
 public interface MainView extends BaseView {
 
-    void OnloadSuccess(BannerBean bannerBean);
 }

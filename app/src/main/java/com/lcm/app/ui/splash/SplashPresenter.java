@@ -25,6 +25,7 @@ public class SplashPresenter extends BaseMvpPresenter<SplashView> {
 
     public void getSplash() {
         splashImpl.getSplash()
-                .subscribe(welfareBeen -> getmMvpView().getSplashSuccess(welfareBeen.get(0)));
+                .subscribe(welfareBeen -> getmMvpView().getSplashSuccess(welfareBeen.get(0)),
+                        Throwable::printStackTrace);
     }
 }

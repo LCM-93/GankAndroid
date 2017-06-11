@@ -1,4 +1,4 @@
-package com.lcm.app.main;
+package com.lcm.app.ui.main;
 
 import android.widget.Button;
 import android.widget.TextView;
@@ -9,6 +9,8 @@ import com.lcm.app.base.MvpActivity;
 import com.lcm.app.dagger.component.AppComponent;
 import com.lcm.app.dagger.component.DaggerRepoComponent;
 import com.lcm.app.data.entity.BannerBean;
+import com.lcm.app.ui.main.MainPresenter;
+import com.lcm.app.ui.main.MainView;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,11 +19,6 @@ import butterknife.BindView;
 
 public class MainActivity extends MvpActivity<MainPresenter> implements MainView {
 
-
-    @BindView(R.id.tv)
-    TextView tv;
-    @BindView(R.id.btn)
-    Button btn;
 
 
     @Override
@@ -37,9 +34,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
     @Override
     protected void initView() {
-        RxView.clicks(btn)
-                .throttleFirst(2, TimeUnit.SECONDS)
-                .subscribe(o -> mPresenter.load());
+
     }
 
 
@@ -57,8 +52,5 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                 .inject(this);
     }
 
-    @Override
-    public void OnloadSuccess(BannerBean bannerBean) {
-        tv.setText(bannerBean.toString());
-    }
+
 }
