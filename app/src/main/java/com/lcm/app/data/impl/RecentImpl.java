@@ -1,5 +1,7 @@
 package com.lcm.app.data.impl;
 
+import android.support.annotation.StringDef;
+
 import com.lcm.app.data.api.ApiManager;
 import com.lcm.app.data.entity.DailyBean;
 import com.lcm.app.data.entity.DailyContentBean;
@@ -9,6 +11,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,5 +141,12 @@ public class RecentImpl {
 //                    }
 //                    return dailyContentBean;
 //                })
+    }
+
+
+    @Retention(RetentionPolicy.SOURCE)
+    @StringDef({GankType.Android,GankType.IOS,GankType.Video,GankType.Web,GankType.Extra,GankType.Welfare,GankType.Random_Recommend})
+    public @interface GankType{
+        String Android="Android",IOS="iOS",Video="休息视频",Web="前端",Welfare="福利",Extra="拓展资源",Random_Recommend="瞎推荐";
     }
 }

@@ -65,6 +65,7 @@ dependencies {
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.4.3'
     compile 'org.jsoup:jsoup:1.10.2'
     compile 'com.github.tianzhijiexian:CommonAdapter:1.2.3'
+    compile 'com.wdullaer:materialdatetimepicker:3.2.2'
 
 
 

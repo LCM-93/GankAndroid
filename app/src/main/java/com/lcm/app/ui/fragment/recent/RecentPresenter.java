@@ -52,6 +52,7 @@ public class RecentPresenter extends BaseMvpPresenter<RecentView> {
 
     public void getDailyData(String year, String month, String day) {
         recentImpl.getDailyData(year, month, day)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(dailyContentBeen -> {
                     DailyContentBean dailyContentBean = dailyContentBeen.get(0);
                     if (dailyContentBean.getType().equals("福利")) {
@@ -59,7 +60,17 @@ public class RecentPresenter extends BaseMvpPresenter<RecentView> {
                         dailyContentBeen.remove(dailyContentBean);
                     }
                     getmMvpView().refreshDailySuccess(dailyContentBeen);
-                }, Throwable::printStackTrace, () -> getmMvpView().showRefresh(false));
+                    if(dailyContentBeen.size()==0){
+                        getmMvpView().showEmpty();
+                    }
+                }, throwable -> {
+                    getmMvpView().showRefresh(false);
+                    getmMvpView().showEmpty();
+                    LogUtils.e("lcm", "出错：：" + throwable.getMessage());
+                }, () -> {
+                    getmMvpView().showRefresh(false);
+                    LogUtils.e("lcm", "onComplete");
+                });
 
 
     }

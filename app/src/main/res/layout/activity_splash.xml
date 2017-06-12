@@ -34,7 +34,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@mipmap/gank_logo" />
+            android:src="@mipmap/ic_launcher" />
 
         <View
             android:layout_width="1dp"

@@ -28,9 +28,22 @@ public interface CommonApi {
     Observable<HttpBaseResult<List<WelfareBean>>> getSplash();
 
 
+    /**
+     * 获取更新干货的历史记录
+     *
+     * @return
+     */
     @GET("day/history")
     Observable<HttpBaseResult<List<String>>> getHistoryDateList();
 
+    /**
+     * 获取指定日期干货信息
+     *
+     * @param year
+     * @param month
+     * @param day
+     * @return
+     */
     @GET("history/content/day/{YEAR}/{MONTH}/{DAY}")
     Observable<HttpBaseResult<List<DailyBean>>> getDailyData(@Path("YEAR") String year, @Path("MONTH") String month, @Path("DAY") String day);
 }

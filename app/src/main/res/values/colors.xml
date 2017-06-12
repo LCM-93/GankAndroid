@@ -6,4 +6,14 @@
 
     <color name="white">#ffffff</color>
     <color name="main_color">#65d7ef</color>
+
+    <color name="color_bg_gray">#f7f7f7</color>
+
+    <color name="color_tag_android">#673ab7</color>
+    <color name="color_tag_ios">#9c27b0</color>
+    <color name="color_tag_web">#e91e63</color>
+    <color name="color_tag_welfare">#cddc39</color>
+    <color name="color_tag_video">#8bc34a</color>
+    <color name="color_tag_extra">#ff5722</color>
+    <color name="color_tag_random_recommend">#ffa726</color>
 </resources>

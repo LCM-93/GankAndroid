@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cardElevation">4dp</dimen>
+    <dimen name="cardMargin_top_bottom">4dp</dimen>
+    <dimen name="cardMargin_right_left">8dp</dimen>
+</resources>
