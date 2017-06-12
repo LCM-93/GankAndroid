@@ -68,15 +68,15 @@ public class ScrollAwareFABBehavior extends CoordinatorLayout.Behavior<FloatingA
     @Override
     public void onNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
 //        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
-        LogUtils.e("lcm","dxConsumed::"+dxConsumed+"   dyConsumed::"+dyConsumed+"   dxUnconsumed::"+dxUnconsumed+"  dyUnconsumed::"+dyUnconsumed);
+//        LogUtils.e("lcm","dxConsumed::"+dxConsumed+"   dyConsumed::"+dyConsumed+"   dxUnconsumed::"+dxUnconsumed+"  dyUnconsumed::"+dyUnconsumed);
 
         if (dyConsumed > 0 && !this.mIsAnimatingOut && child.getVisibility() == View.VISIBLE) {
             // User scrolled down and the FAB is currently visible -> hide the FAB
-            LogUtils.e("lcm","animateOut-----------");
+//            LogUtils.e("lcm","animateOut-----------");
             animateOut(child);
         } else if (dyConsumed < 0 && child.getVisibility() != View.VISIBLE) {
             // User scrolled up and the FAB is currently not visible -> show the FAB
-            LogUtils.e("lcm","animateIn++++++++++++");
+//            LogUtils.e("lcm","animateIn++++++++++++");
             animateIn(child);
         }
     }

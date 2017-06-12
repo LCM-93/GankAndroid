@@ -88,6 +88,7 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
             }
         }, new LinearLayoutManager(getContext()));
 
+
         headerView = View.inflate(getContext(), R.layout.header_recent_list, null);
         headerImage = (ImageView) headerView.findViewById(R.id.iv_header);
         headerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) DeviceUtils.dpToPixel(getContext(), 200)));
