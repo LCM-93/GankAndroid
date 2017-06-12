@@ -1,8 +1,8 @@
 package com.lcm.app.dagger.component;
 
 import com.lcm.android.dagger.scope.ActivityScope;
-import com.lcm.app.ui.main.MainActivity;
-import com.lcm.app.ui.splash.SplashActivity;
+import com.lcm.app.ui.activity.main.MainActivity;
+import com.lcm.app.ui.activity.splash.SplashActivity;
 
 import dagger.Component;
 
@@ -15,7 +15,7 @@ import dagger.Component;
  */
 @ActivityScope
 @Component(dependencies = AppComponent.class)
-public interface RepoComponent {
+public interface ActivityComponent {
 
     void inject(MainActivity mainActivity);
 

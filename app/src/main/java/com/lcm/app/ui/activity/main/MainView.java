@@ -1,4 +1,4 @@
-package com.lcm.app.ui.main;
+package com.lcm.app.ui.activity.main;
 
 import com.lcm.android.mvp.BaseView;
 

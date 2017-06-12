@@ -1,7 +1,7 @@
 package com.lcm.app.data.api;
 
 
-import com.lcm.app.data.entity.BannerBean;
+import com.lcm.app.data.entity.DailyBean;
 import com.lcm.app.data.entity.HttpBaseResult;
 import com.lcm.app.data.entity.WelfareBean;
 
@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
  * ****************************************************************
@@ -21,17 +22,15 @@ public interface CommonApi {
 
 
     /**
-     * 获取所有banner
-     *
-     * @return
-     */
-    @GET("bannerlist")
-    Observable<HttpBaseResult<List<BannerBean>>> getBanners();
-
-    /**
-     * 获取启动页美女图
      * @return
      */
     @GET("random/data/福利/2")
     Observable<HttpBaseResult<List<WelfareBean>>> getSplash();
+
+
+    @GET("day/history")
+    Observable<HttpBaseResult<List<String>>> getHistoryDateList();
+
+    @GET("history/content/day/{YEAR}/{MONTH}/{DAY}")
+    Observable<HttpBaseResult<List<DailyBean>>> getDailyData(@Path("YEAR") String year, @Path("MONTH") String month, @Path("DAY") String day);
 }

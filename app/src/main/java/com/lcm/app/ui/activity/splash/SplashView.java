@@ -1,4 +1,4 @@
-package com.lcm.app.ui.splash;
+package com.lcm.app.ui.activity.splash;
 
 import com.lcm.android.mvp.BaseView;
 import com.lcm.app.data.entity.WelfareBean;

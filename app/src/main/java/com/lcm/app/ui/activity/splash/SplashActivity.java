@@ -1,4 +1,4 @@
-package com.lcm.app.ui.splash;
+package com.lcm.app.ui.activity.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +12,9 @@ import com.bumptech.glide.Glide;
 import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;
 import com.lcm.app.dagger.component.AppComponent;
-import com.lcm.app.dagger.component.DaggerRepoComponent;
+import com.lcm.app.dagger.component.DaggerActivityComponent;
 import com.lcm.app.data.entity.WelfareBean;
-import com.lcm.app.ui.main.MainActivity;
+import com.lcm.app.ui.activity.main.MainActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -77,7 +77,7 @@ public class SplashActivity extends MvpActivity<SplashPresenter> implements Spla
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerRepoComponent.builder()
+        DaggerActivityComponent.builder()
                 .appComponent(appComponent)
                 .build()
                 .inject(this);

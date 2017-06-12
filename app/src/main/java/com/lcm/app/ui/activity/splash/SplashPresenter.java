@@ -1,4 +1,4 @@
-package com.lcm.app.ui.splash;
+package com.lcm.app.ui.activity.splash;
 
 import com.lcm.android.mvp.BaseMvpPresenter;
 import com.lcm.app.data.impl.SplashImpl;
