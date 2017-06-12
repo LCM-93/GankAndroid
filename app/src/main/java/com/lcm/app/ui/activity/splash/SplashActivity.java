@@ -37,6 +37,7 @@ public class SplashActivity extends MvpActivity<SplashPresenter> implements Spla
     ImageView ivSplash;
     @BindView(R.id.tv_time)
     TextView tvTime;
+    private String url;
 
     @Nullable
     @Override
@@ -70,7 +71,11 @@ public class SplashActivity extends MvpActivity<SplashPresenter> implements Spla
                 .subscribe(aLong -> tvTime.setText(String.valueOf(5 - aLong)),
                         throwable -> throwable.printStackTrace(),
                         () -> {
-                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                            if (url != null) {
+                                intent.putExtra("imgUrl", url);
+                            }
+                            startActivity(intent);
                             finish();
                         });
     }
@@ -85,6 +90,7 @@ public class SplashActivity extends MvpActivity<SplashPresenter> implements Spla
 
     @Override
     public void getSplashSuccess(WelfareBean welfareBean) {
+        url = welfareBean.getUrl();
         Glide.with(this)
                 .load(welfareBean.getUrl())
                 .into(ivSplash);

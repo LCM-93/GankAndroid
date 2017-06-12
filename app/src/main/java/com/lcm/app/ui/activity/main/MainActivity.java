@@ -16,8 +16,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.blankj.utilcode.utils.LogUtils;
+import com.bumptech.glide.Glide;
 import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;
 import com.lcm.app.dagger.component.AppComponent;
@@ -30,8 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 
 public class MainActivity extends MvpActivity<MainPresenter> implements MainView, NavigationView.OnNavigationItemSelectedListener {
@@ -57,6 +59,9 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
+    private String imgUrl;
+    private ImageView ivHeader;
+
     @Override
     protected int rootView() {
         return R.layout.activity_main;
@@ -64,6 +69,8 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
     @Override
     protected void initView() {
+        imgUrl = getIntent().getStringExtra("imgUrl");
+
         fragmentList = new ArrayList<>();
         fragmentList.add(RecentFragment.newInstance());
         toolbar.setTitle(R.string.app_name);
@@ -87,10 +94,18 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         mDrawerToggle.syncState();
         drawerLayout.addDrawerListener(mDrawerToggle);
 
+        View headerView = navigation.getHeaderView(0);
+        ivHeader = (ImageView) headerView.findViewById(R.id.iv_header);
+
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.frame_layout, fragmentList.get(currentIndex)).commit();
 
 
+        if (imgUrl != null) {
+            Glide.with(this).load(imgUrl)
+                    .bitmapTransform(new BlurTransformation(this))
+                    .into(ivHeader);
+        }
     }
 
 
