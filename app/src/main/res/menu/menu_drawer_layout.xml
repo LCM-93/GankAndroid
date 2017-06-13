@@ -10,17 +10,17 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/menu_recent_all"
+        android:id="@+id/menu_all_gank"
         android:icon="@mipmap/iv_bottom_type"
         android:title="分类阅读"
         app:showAsAction="always" />
 
-    <item android:id="@+id/menu_recent_recommend"
+    <item android:id="@+id/menu_recommend_gank"
         android:icon="@mipmap/iv_bottom_recommend"
         android:title="精品推荐"
         app:showAsAction="always"/>
 
-    <item android:id="@+id/menu_recent_about"
+    <item android:id="@+id/menu_about"
         android:icon="@mipmap/iv_bottom_about"
         android:title="关于我们"
         app:showAsAction="always"

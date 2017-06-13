@@ -47,7 +47,8 @@ public abstract class BaseFragment extends RxFragment {
         super.onActivityCreated(savedInstanceState);
         mActivity = (BaseActivity) getActivity();
         mContext = getContext();
-
+        initView();
+        initData();
     }
 
 

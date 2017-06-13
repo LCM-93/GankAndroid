@@ -42,8 +42,6 @@ public abstract class MvpFragment<P extends BaseMvpPresenter> extends BaseMvpFra
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mPresenter.onAttachView(this);
-        initView();
-        initData();
 
     }
 

@@ -2,6 +2,7 @@ package com.lcm.app.data.api;
 
 
 import com.lcm.app.data.entity.DailyBean;
+import com.lcm.app.data.entity.GankBean;
 import com.lcm.app.data.entity.HttpBaseResult;
 import com.lcm.app.data.entity.WelfareBean;
 
@@ -46,4 +47,8 @@ public interface CommonApi {
      */
     @GET("history/content/day/{YEAR}/{MONTH}/{DAY}")
     Observable<HttpBaseResult<List<DailyBean>>> getDailyData(@Path("YEAR") String year, @Path("MONTH") String month, @Path("DAY") String day);
+
+
+    @GET("data/{TYPE}/20/{PAGE}")
+    Observable<HttpBaseResult<List<GankBean>>> getGankByType(@Path("TYPE") String type, @Path("PAGE") Integer page);
 }

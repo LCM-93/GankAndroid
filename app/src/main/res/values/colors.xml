@@ -9,6 +9,8 @@
 
     <color name="color_bg_gray">#f7f7f7</color>
 
+    <color name="color_tab_bg_gray">#e0e0e0</color>
+
     <color name="color_tag_android">#673ab7</color>
     <color name="color_tag_ios">#9c27b0</color>
     <color name="color_tag_web">#e91e63</color>

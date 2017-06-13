@@ -24,6 +24,7 @@ import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;
 import com.lcm.app.dagger.component.AppComponent;
 import com.lcm.app.dagger.component.DaggerActivityComponent;
+import com.lcm.app.ui.fragment.allgank.AllGankFragment;
 import com.lcm.app.ui.fragment.recent.RecentFragment;
 
 import org.simple.eventbus.EventBus;
@@ -73,6 +74,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
         fragmentList = new ArrayList<>();
         fragmentList.add(RecentFragment.newInstance());
+        fragmentList.add(AllGankFragment.newInstance());
         toolbar.setTitle(R.string.app_name);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         toolbar.inflateMenu(R.menu.menu_base_toolbar);
@@ -144,10 +146,10 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         Fragment currentFragment = fragmentList.get(currentIndex);
         fragmentTransaction = fragmentManager.beginTransaction();
 
-        if (targetFragment.isAdded()) {
-            fragmentTransaction.hide(currentFragment).show(targetFragment).commit();
+        if (!targetFragment.isAdded()) {
+            fragmentTransaction.add(R.id.frame_layout, targetFragment).hide(currentFragment).commitAllowingStateLoss();
         } else {
-            fragmentTransaction.hide(currentFragment).add(R.id.frame_layout, targetFragment).commit();
+            fragmentTransaction.show(targetFragment).hide(currentFragment).commitAllowingStateLoss();
         }
         currentIndex = targetIndex;
     }
@@ -162,19 +164,19 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                 drawerLayout.closeDrawers();
                 break;
 
-            case R.id.menu_recent_all:
+            case R.id.menu_all_gank:
                 LogUtils.e("lcm", "点击分类");
-                setFragment(0);
+                setFragment(1);
                 drawerLayout.closeDrawers();
                 break;
 
-            case R.id.menu_recent_recommend:
+            case R.id.menu_recommend_gank:
                 LogUtils.e("lcm", "点击推荐");
                 setFragment(0);
                 drawerLayout.closeDrawers();
                 break;
 
-            case R.id.menu_recent_about:
+            case R.id.menu_about:
                 LogUtils.e("lcm", "点击关于我们");
                 setFragment(0);
                 drawerLayout.closeDrawers();

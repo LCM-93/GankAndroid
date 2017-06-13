@@ -2,6 +2,7 @@ package com.lcm.app.dagger.component;
 
 import com.lcm.android.dagger.scope.FragmentScope;
 import com.lcm.app.ui.fragment.recent.RecentFragment;
+import com.lcm.app.ui.fragment.typegank.TypeGankFragment;
 
 import dagger.Component;
 
@@ -16,4 +17,6 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class)
 public interface FragmentComponent {
     void inject(RecentFragment recentFragment);
+
+    void inject(TypeGankFragment typeGankFragment);
 }

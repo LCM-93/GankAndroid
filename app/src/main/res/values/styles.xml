@@ -14,9 +14,12 @@
         <item name="android:windowBackground">@mipmap/iv_splash</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="MyTabLayoutStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="tabBackground">@color/color_tab_bg_gray</item>
+        <item name="tabSelectedTextColor">@color/colorPrimary</item>
+        <item name="tabIndicatorColor">@color/colorPrimary</item>
+    </style>
 
 
 </resources>

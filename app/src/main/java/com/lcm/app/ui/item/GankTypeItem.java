@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lcm.android.utils.DeviceUtils;
 import com.lcm.app.R;
-import com.lcm.app.data.entity.DailyContentBean;
+import com.lcm.app.data.entity.GankBean;
 import com.lcm.app.ui.activity.web.WebActivity;
 
 import butterknife.BindView;
@@ -20,12 +20,13 @@ import kale.adapter.item.AdapterItem;
 /**
  * ****************************************************************
  * Author: LCM
- * Date: 2017/6/11 下午6:02
+ * Date: 2017/6/13 上午10:08
  * Desc:
  * *****************************************************************
  */
 
-public class RecentItem implements AdapterItem<DailyContentBean> {
+public class GankTypeItem implements AdapterItem<GankBean> {
+
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.tv_tag)
@@ -39,7 +40,7 @@ public class RecentItem implements AdapterItem<DailyContentBean> {
 
     @Override
     public int getLayoutResId() {
-        return R.layout.item_recyler_recent;
+        return R.layout.item_recyler_gank_type;
     }
 
     @Override
@@ -53,25 +54,23 @@ public class RecentItem implements AdapterItem<DailyContentBean> {
         cardView.setOnClickListener(v -> WebActivity.startWebActivity(context, url));
     }
 
-
     @Override
-    public void handleData(DailyContentBean dailyContentBean, int i) {
-        tvTitle.setText(dailyContentBean.getText());
-        tvTag.setText(dailyContentBean.getType());
-        url = dailyContentBean.getUrl();
-        if (dailyContentBean.getSrc() != null && !"null".equals(dailyContentBean.getSrc())) {
-            ivImage.setVisibility(View.VISIBLE);
-            Glide.with(context)
-                    .load(dailyContentBean.getSrc())
-                    .bitmapTransform(new RoundedCornersTransformation(context, (int) DeviceUtils.dpToPixel(context, 8), 0))
-                    .placeholder(R.mipmap.iv_place_holder)
-                    .error(R.mipmap.iv_place_holder)
-                    .into(ivImage);
-        } else {
+    public void handleData(GankBean gankBean, int i) {
+        url = gankBean.getUrl();
+        tvTitle.setText(gankBean.getDesc());
+        tvTag.setText(gankBean.getType());
+        if (gankBean.getImages() == null || gankBean.getImages().size() == 0) {
             ivImage.setVisibility(View.GONE);
+        } else {
+            ivImage.setVisibility(View.VISIBLE);
+            Glide.with(context).load(gankBean.getImages().get(0))
+                    .bitmapTransform(new RoundedCornersTransformation(context, (int) DeviceUtils.dpToPixel(context, 8), 0))
+                    .error(R.mipmap.iv_place_holder)
+                    .placeholder(R.mipmap.iv_place_holder)
+                    .into(ivImage);
         }
 
-        switch (dailyContentBean.getType().toLowerCase()) {
+        switch (gankBean.getType().toLowerCase()) {
             case "android":
                 tvTag.setBackgroundResource(R.drawable.shape_tag_bg_android);
                 break;
@@ -95,6 +94,11 @@ public class RecentItem implements AdapterItem<DailyContentBean> {
             case "瞎推荐":
                 tvTag.setBackgroundResource(R.drawable.shape_tag_bg_random_recommend);
                 break;
+
+            case "福利":
+                tvTag.setBackgroundResource(R.drawable.shape_tag_bg_welfare);
+                break;
         }
+
     }
 }
