@@ -15,5 +15,9 @@ import java.util.List;
 
 public interface TypeGankView extends BaseView {
 
-    void getGankSuccess(List<GankBean> gankBeanList);
+    void refreshGankSuccess(List<GankBean> gankBeanList);
+
+    void loadMoreList(List<GankBean> gankBeanList);
+
+    void showRefresh(boolean isShow);
 }
