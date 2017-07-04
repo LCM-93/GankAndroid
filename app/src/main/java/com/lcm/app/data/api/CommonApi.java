@@ -51,4 +51,8 @@ public interface CommonApi {
 
     @GET("data/{TYPE}/20/{PAGE}")
     Observable<HttpBaseResult<List<GankBean>>> getGankByType(@Path("TYPE") String type, @Path("PAGE") Integer page);
+
+
+    @GET("search/query/{QUERY}/category/{TYPE}/count/15/page/{PAGE}")
+    Observable<HttpBaseResult<List<GankBean>>> searchGank(@Path("QUERY") String query, @Path("TYPE") String type, @Path("PAGE") int page);
 }

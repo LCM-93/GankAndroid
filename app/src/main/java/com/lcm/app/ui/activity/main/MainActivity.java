@@ -1,5 +1,6 @@
 package com.lcm.app.ui.activity.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
@@ -24,6 +25,7 @@ import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;
 import com.lcm.app.dagger.component.AppComponent;
 import com.lcm.app.dagger.component.DaggerActivityComponent;
+import com.lcm.app.ui.activity.search.SearchActivity;
 import com.lcm.app.ui.fragment.allgank.AllGankFragment;
 import com.lcm.app.ui.fragment.recent.RecentFragment;
 
@@ -37,7 +39,7 @@ import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 
-public class MainActivity extends MvpActivity<MainPresenter> implements MainView, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends MvpActivity<MainPresenter> implements MainView, NavigationView.OnNavigationItemSelectedListener, Toolbar.OnMenuItemClickListener {
 
 
     @BindView(R.id.toolbar)
@@ -114,6 +116,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     @Override
     protected void initData() {
         navigation.setNavigationItemSelectedListener(this);
+        toolbar.setOnMenuItemClickListener(this);
     }
 
 
@@ -159,27 +162,38 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_recent_gank:
-                LogUtils.e("lcm", "点击首页");
                 setFragment(0);
                 drawerLayout.closeDrawers();
+                floatingButton.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.menu_all_gank:
-                LogUtils.e("lcm", "点击分类");
                 setFragment(1);
                 drawerLayout.closeDrawers();
+                floatingButton.setVisibility(View.GONE);
                 break;
 
             case R.id.menu_recommend_gank:
-                LogUtils.e("lcm", "点击推荐");
                 setFragment(0);
                 drawerLayout.closeDrawers();
+                floatingButton.setVisibility(View.GONE);
                 break;
 
             case R.id.menu_about:
-                LogUtils.e("lcm", "点击关于我们");
                 setFragment(0);
                 drawerLayout.closeDrawers();
+                floatingButton.setVisibility(View.GONE);
+                break;
+        }
+        return false;
+    }
+
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_search:
+                startActivity(new Intent(this, SearchActivity.class));
                 break;
         }
         return false;

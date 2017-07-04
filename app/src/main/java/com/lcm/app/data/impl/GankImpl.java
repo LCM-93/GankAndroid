@@ -43,4 +43,11 @@ public class GankImpl {
     public @interface GankType {
         String All = "all", Android = "Android", IOS = "iOS", Video = "休息视频", Web = "前端", Welfare = "福利", Extra = "拓展资源", Random_Recommend = "瞎推荐";
     }
+
+
+    public Observable<List<GankBean>> searchGank(String query, @GankType String type, int page) {
+        return apiManager.getCommonService().searchGank(query, type, page)
+                .compose(RxHelper.rxSchedulerHelper())
+                .compose(RxHelper.handleResult());
+    }
 }
