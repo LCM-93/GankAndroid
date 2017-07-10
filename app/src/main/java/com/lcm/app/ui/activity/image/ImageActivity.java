@@ -104,6 +104,10 @@ public class ImageActivity extends BaseActivity implements Toolbar.OnMenuItemCli
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_share:
+                Intent intent1=new Intent(Intent.ACTION_SEND);
+                intent1.putExtra(Intent.EXTRA_TEXT,"福利哦  (｡・`ω´･)  "+imageUrl);
+                intent1.setType("text/plain");
+                startActivity(Intent.createChooser(intent1,"share"));
 
                 break;
 
