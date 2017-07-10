@@ -40,8 +40,14 @@
         <activity
             android:name=".ui.activity.search.SearchActivity"
             android:screenOrientation="portrait">
+
         </activity>
 
+        <activity
+            android:name=".ui.activity.image.ImageActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

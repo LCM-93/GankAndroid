@@ -66,6 +66,7 @@ dependencies {
     compile 'org.jsoup:jsoup:1.10.2'
     compile 'com.github.tianzhijiexian:CommonAdapter:1.2.3'
     compile 'com.wdullaer:materialdatetimepicker:3.2.2'
+    compile 'com.github.chrisbanes:PhotoView:2.1.2'
 
 
 

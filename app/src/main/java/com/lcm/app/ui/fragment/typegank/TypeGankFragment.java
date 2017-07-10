@@ -95,7 +95,7 @@ public class TypeGankFragment extends MvpFragment<TypeGankPresenter> implements 
             public AdapterItem createItem(Object o) {
                 switch ((String) o) {
                     case "福利":
-                        return new GankWelfareItem();
+                        return new GankWelfareItem(getActivity());
 
                     default:
                         return new GankTypeItem();

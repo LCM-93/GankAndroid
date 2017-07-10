@@ -1,7 +1,6 @@
 package com.lcm.app.ui.activity.search;
 
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.utils.ToastUtils;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;
 import com.lcm.app.dagger.component.AppComponent;
@@ -31,8 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
 import kale.adapter.CommonRcvAdapter;
 import kale.adapter.item.AdapterItem;
 
@@ -62,7 +63,6 @@ public class SearchActivity extends MvpActivity<SearchPresenter> implements Sear
     @BindView(R.id.iv_search)
     ImageView ivSearch;
 
-    private String type = "all";
     private List<GankBean> gankBeanList;
     private CommonRcvAdapter<GankBean> commonRcvAdapter;
     private LinearLayoutManager linearLayoutManager;
@@ -84,6 +84,10 @@ public class SearchActivity extends MvpActivity<SearchPresenter> implements Sear
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        RxTextView.textChanges(edtQuery)
+                .subscribe(charSequence ->
+                        ivSearch.setVisibility(charSequence.length() > 0 ? View.VISIBLE : View.GONE)
+                );
 
         gankBeanList = new ArrayList<>();
         linearLayoutManager = new LinearLayoutManager(this);
@@ -100,7 +104,7 @@ public class SearchActivity extends MvpActivity<SearchPresenter> implements Sear
             public AdapterItem createItem(Object o) {
                 switch ((String) o) {
                     case "福利":
-                        return new GankWelfareItem();
+                        return new GankWelfareItem(SearchActivity.this);
 
                     default:
                         return new GankTypeItem();
@@ -140,6 +144,7 @@ public class SearchActivity extends MvpActivity<SearchPresenter> implements Sear
             ToastUtils.showShortToast("搜索内容不能为空");
             return;
         }
+        edtQuery.clearFocus();
         swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
         currentPage = 1;
         mPresenter.searchGank(edtQuery.getText().toString(), GankImpl.GankType.All, currentPage);
