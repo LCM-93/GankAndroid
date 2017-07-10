@@ -1,7 +1,7 @@
 package com.lcm.android.mvp;
 
 
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 /**
  * ****************************************************************
@@ -29,11 +29,11 @@ public class BaseMvpPresenter<V extends BaseView> implements BasePresenter<V>{
     }
 
     protected void showShortToast(String msg){
-        ToastUtils.showShortToast(msg);
+        ToastUtils.showShort(msg);
     }
 
     protected void showLongToast(String msg){
-        ToastUtils.showLongToast(msg);
+        ToastUtils.showShort(msg);
     }
 
 }

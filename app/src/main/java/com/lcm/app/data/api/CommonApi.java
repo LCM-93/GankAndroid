@@ -9,8 +9,11 @@ import com.lcm.app.data.entity.WelfareBean;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Url;
 
 /**
  * ****************************************************************
@@ -55,4 +58,8 @@ public interface CommonApi {
 
     @GET("search/query/{QUERY}/category/{TYPE}/count/15/page/{PAGE}")
     Observable<HttpBaseResult<List<GankBean>>> searchGank(@Path("QUERY") String query, @Path("TYPE") String type, @Path("PAGE") int page);
+
+
+    @GET
+    Observable<ResponseBody> downloadPic(@Url String image_url);
 }

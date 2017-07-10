@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.lcm.android.mvp.BaseMvpFragment;
 import com.lcm.android.mvp.BaseMvpPresenter;
 import com.lcm.android.mvp.BaseView;
@@ -28,7 +28,7 @@ public abstract class MvpFragment<P extends BaseMvpPresenter> extends BaseMvpFra
 
     @Override
     public void showMessage(String str) {
-        ToastUtils.showShortToast(str);
+        ToastUtils.showShort(str);
     }
 
 

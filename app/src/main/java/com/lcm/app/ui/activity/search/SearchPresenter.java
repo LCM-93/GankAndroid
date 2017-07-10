@@ -1,6 +1,6 @@
 package com.lcm.app.ui.activity.search;
 
-import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.lcm.android.mvp.BaseMvpPresenter;
 import com.lcm.app.data.entity.GankBean;
 import com.lcm.app.data.impl.GankImpl;

@@ -15,8 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.utils.ToastUtils;
-import com.jakewharton.rxbinding2.view.RxView;
+import com.blankj.utilcode.util.ToastUtils;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;
@@ -33,7 +32,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.functions.Consumer;
 import kale.adapter.CommonRcvAdapter;
 import kale.adapter.item.AdapterItem;
 
@@ -141,7 +139,7 @@ public class SearchActivity extends MvpActivity<SearchPresenter> implements Sear
     @OnClick(R.id.iv_search)
     public void search() {
         if (TextUtils.isEmpty(edtQuery.getText().toString().trim())) {
-            ToastUtils.showShortToast("搜索内容不能为空");
+            ToastUtils.showShort("搜索内容不能为空");
             return;
         }
         edtQuery.clearFocus();

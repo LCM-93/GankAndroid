@@ -19,7 +19,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.blankj.utilcode.utils.LogUtils;
 import com.bumptech.glide.Glide;
 import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;

@@ -1,14 +1,21 @@
 package com.lcm.app.ui.activity.image;
 
+import android.Manifest;
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.lcm.android.base.BaseActivity;
 import com.lcm.app.R;
+import com.lcm.app.service.DownLoadService;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 
@@ -20,11 +27,12 @@ import butterknife.BindView;
  * *****************************************************************
  */
 
-public class ImageActivity extends BaseActivity {
+public class ImageActivity extends BaseActivity implements Toolbar.OnMenuItemClickListener {
     @BindView(R.id.image)
     PhotoView image;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    private static final String TAG = "ImageActivity";
 
 
     private String imageUrl;
@@ -39,9 +47,9 @@ public class ImageActivity extends BaseActivity {
     protected void initView() {
 
 
-
         toolbar.setTitle("福利");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        toolbar.inflateMenu(R.menu.menu_image_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -51,6 +59,14 @@ public class ImageActivity extends BaseActivity {
 
 
         image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        new RxPermissions(this)
+                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS)
+                .subscribe(aBoolean -> {
+                    if(aBoolean) LogUtils.i(TAG,"获取权限成功");
+                });
 
         Glide.with(this)
                 .load(imageUrl)
@@ -64,7 +80,7 @@ public class ImageActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        toolbar.setOnMenuItemClickListener(this);
     }
 
 
@@ -75,6 +91,31 @@ public class ImageActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_image_toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_share:
+
+                break;
+
+            case R.id.menu_download:
+
+                Intent intent = new Intent(this, DownLoadService.class);
+                intent.putExtra(DownLoadService.DOWNLOAD_TYPE, DownLoadService.IMAGE);
+                intent.putExtra(DownLoadService.DOWNLOAD_URL, imageUrl);
+                startService(intent);
+                break;
+        }
+        return false;
     }
 
 }

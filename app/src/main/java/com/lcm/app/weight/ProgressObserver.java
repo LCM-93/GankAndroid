@@ -4,9 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 
-import com.blankj.utilcode.utils.LogUtils;
-import com.blankj.utilcode.utils.NetworkUtils;
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -60,7 +59,7 @@ public class ProgressObserver<T> implements Observer<T>, ProgressCancelListener 
 //        if (e.getMessage().equals("login_error"))
 //            RouterHelper.getLoginActivityHelper().start(App.getContext());
         if (!NetworkUtils.isConnected()) {
-            ToastUtils.showShortToast("请检查网络连接");
+            ToastUtils.showShort("请检查网络连接");
         }
     }
 

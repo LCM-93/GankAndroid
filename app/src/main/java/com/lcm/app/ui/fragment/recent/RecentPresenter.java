@@ -1,26 +1,13 @@
 package com.lcm.app.ui.fragment.recent;
 
-import com.blankj.utilcode.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.lcm.android.mvp.BaseMvpPresenter;
 import com.lcm.app.data.entity.DailyContentBean;
-import com.lcm.app.data.entity.ElementWithType;
 import com.lcm.app.data.impl.RecentImpl;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 /**
  * ****************************************************************
@@ -60,7 +47,7 @@ public class RecentPresenter extends BaseMvpPresenter<RecentView> {
                         dailyContentBeen.remove(dailyContentBean);
                     }
                     getmMvpView().refreshDailySuccess(dailyContentBeen);
-                    if(dailyContentBeen.size()==0){
+                    if (dailyContentBeen.size() == 0) {
                         getmMvpView().showEmpty();
                     }
                 }, throwable -> {

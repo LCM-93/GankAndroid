@@ -1,7 +1,6 @@
 package com.lcm.app;
 
-import com.blankj.utilcode.utils.NetworkUtils;
-import com.blankj.utilcode.utils.Utils;
+import com.blankj.utilcode.util.Utils;
 import com.lcm.android.base.BaseApplication;
 import com.lcm.app.dagger.component.AppComponent;
 import com.lcm.app.dagger.component.DaggerAppComponent;
@@ -42,7 +41,7 @@ public class MyApplication extends BaseApplication {
      *
      * @return
      */
-    public AppComponent getAppComponent() {
+    public static AppComponent getAppComponent() {
         return mAppComponent;
     }
 

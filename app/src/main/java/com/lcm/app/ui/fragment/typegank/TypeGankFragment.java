@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.utils.LogUtils;
 import com.lcm.app.R;
 import com.lcm.app.base.MvpFragment;
 import com.lcm.app.dagger.component.AppComponent;

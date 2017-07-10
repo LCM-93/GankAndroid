@@ -1,6 +1,7 @@
 package com.lcm.app.dagger.component;
 
 import com.lcm.android.dagger.scope.ActivityScope;
+import com.lcm.app.service.DownLoadService;
 import com.lcm.app.ui.activity.main.MainActivity;
 import com.lcm.app.ui.activity.search.SearchActivity;
 import com.lcm.app.ui.activity.splash.SplashActivity;
@@ -23,4 +24,6 @@ public interface ActivityComponent {
     void inject(SplashActivity splashActivity);
 
     void inject(SearchActivity searchActivity);
+
+    void inject(DownLoadService downLoadService);
 }

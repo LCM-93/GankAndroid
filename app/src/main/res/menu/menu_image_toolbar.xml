@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/menu_download"
+        android:icon="@mipmap/iv_menu_download"
+        android:title="下载"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_share"
+        android:icon="@mipmap/iv_menu_share"
+        android:title="分享"
+        app:showAsAction="always" />
+
+</menu>

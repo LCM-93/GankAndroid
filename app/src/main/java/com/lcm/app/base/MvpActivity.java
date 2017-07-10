@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.blankj.utilcode.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.lcm.android.mvp.BaseMvpActivity;
 import com.lcm.android.mvp.BaseMvpPresenter;
 import com.lcm.android.mvp.BaseView;
@@ -24,7 +24,7 @@ public abstract class MvpActivity<P extends BaseMvpPresenter>  extends BaseMvpAc
     protected MyApplication application;
     @Override
     public void showMessage(String str) {
-        ToastUtils.showShortToast(str);
+        ToastUtils.showShort(str);
     }
 
     @Override

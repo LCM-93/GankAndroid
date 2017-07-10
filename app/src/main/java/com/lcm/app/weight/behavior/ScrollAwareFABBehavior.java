@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 
-import com.blankj.utilcode.utils.LogUtils;
 
 /**
  * ****************************************************************
