@@ -1,11 +1,15 @@
 package com.lcm.app.ui.fragment.recent;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,6 +23,7 @@ import com.lcm.app.base.MvpFragment;
 import com.lcm.app.dagger.component.AppComponent;
 import com.lcm.app.dagger.component.DaggerFragmentComponent;
 import com.lcm.app.data.entity.DailyContentBean;
+import com.lcm.app.ui.activity.image.ImageActivity;
 import com.lcm.app.ui.item.RecentItem;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -29,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import kale.adapter.CommonRcvAdapter;
 import kale.adapter.RcvAdapterWrapper;
 import kale.adapter.item.AdapterItem;
@@ -41,7 +47,7 @@ import kale.adapter.item.AdapterItem;
  * *****************************************************************
  */
 
-public class RecentFragment extends MvpFragment<RecentPresenter> implements RecentView {
+public class RecentFragment extends MvpFragment<RecentPresenter> implements RecentView, View.OnClickListener {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.swipeRefreshLayout)
@@ -53,6 +59,7 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
     private View headerView;
     private ImageView headerImage;
     private DatePickerDialog datePickerDialog;
+    private DailyContentBean headerDailyContent;
 
     public static RecentFragment newInstance() {
         Bundle args = new Bundle();
@@ -104,6 +111,7 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
     @Override
     protected void initData() {
         mPresenter.getHistoryDate();
+        headerImage.setOnClickListener(this);
     }
 
     @Override
@@ -126,6 +134,7 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
 
     @Override
     public void setHeaderView(DailyContentBean dailyContentBean) {
+        headerDailyContent = dailyContentBean;
         Glide.with(this)
                 .load(dailyContentBean.getSrc())
                 .placeholder(R.mipmap.iv_place_holder)
@@ -133,6 +142,7 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
                 .animate(R.anim.enlarge)
                 .into(headerImage);
     }
+
 
     @Override
     public void showRefresh(boolean show) {
@@ -145,4 +155,18 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_header:
+                Intent intent = new Intent(getActivity(), ImageActivity.class);
+                intent.putExtra("image_url", headerDailyContent.getSrc());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    getActivity().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(), Pair.create(headerImage, "image")).toBundle());
+                } else {
+                    getActivity().startActivity(intent);
+                }
+                break;
+        }
+    }
 }
