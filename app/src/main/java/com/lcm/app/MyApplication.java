@@ -1,5 +1,6 @@
 package com.lcm.app;
 
+import com.avos.avoscloud.AVOSCloud;
 import com.blankj.utilcode.util.Utils;
 import com.lcm.android.base.BaseApplication;
 import com.lcm.app.dagger.component.AppComponent;
@@ -7,7 +8,6 @@ import com.lcm.app.dagger.component.DaggerAppComponent;
 import com.lcm.app.dagger.module.CacheModule;
 import com.lcm.app.dagger.module.ServiceModule;
 
-import cn.bmob.v3.Bmob;
 
 /**
  * ****************************************************************
@@ -24,8 +24,10 @@ public class MyApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
 
-        Bmob.initialize(this,"9185de3aa308e51669004cdaa65aad7e");
+        AVOSCloud.initialize(this,"3e07B9fNB8M0nJ1IWHKdlygm-gzGzoHsz","0jJfWeVCD2drFqQXqvVzkFJb");
+        AVOSCloud.setDebugLogEnabled(true);
 
+        
         Utils.init(getApplicationContext());
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(getAppModule())

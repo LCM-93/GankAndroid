@@ -106,6 +106,8 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
         if (imgUrl != null) {
             Glide.with(this).load(imgUrl)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_launcher)
                     .bitmapTransform(new BlurTransformation(this))
                     .into(ivHeader);
         }
