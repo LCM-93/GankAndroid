@@ -7,6 +7,8 @@ import com.lcm.app.dagger.component.DaggerAppComponent;
 import com.lcm.app.dagger.module.CacheModule;
 import com.lcm.app.dagger.module.ServiceModule;
 
+import cn.bmob.v3.Bmob;
+
 /**
  * ****************************************************************
  * Author: LCM
@@ -21,6 +23,8 @@ public class MyApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Bmob.initialize(this,"9185de3aa308e51669004cdaa65aad7e");
 
         Utils.init(getApplicationContext());
         mAppComponent = DaggerAppComponent.builder()
