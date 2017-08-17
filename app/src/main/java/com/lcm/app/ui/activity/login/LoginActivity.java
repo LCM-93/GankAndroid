@@ -1,25 +1,27 @@
 package com.lcm.app.ui.activity.login;
 
 
-import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.text.TextUtils;
 import android.widget.Button;
 
+import com.blankj.utilcode.util.RegexUtils;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent;
 import com.lcm.android.base.BaseActivity;
 import com.lcm.app.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 
 public class LoginActivity extends BaseActivity {
 
 
-//    @BindView(R.id.toolbar)
-//    Toolbar toolbar;
     @BindView(R.id.edt_email)
     TextInputEditText edtEmail;
     @BindView(R.id.til_email)
@@ -38,21 +40,45 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-//        toolbar.setTitle("登录");
-//        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        RxView.focusChanges(edtEmail)
+                .map(aBoolean -> {
+                    if (!aBoolean) {
+                        return RegexUtils.isEmail(edtEmail.getText().toString().trim());
+                    }
+                    return aBoolean;
+                })
+                .subscribe(aBoolean -> {
+                    if (!aBoolean) {
+                        tilEmail.setError("请输入正确的邮箱");
+                    } else {
+                        tilEmail.setErrorEnabled(false);
+                    }
+                });
+
+        RxTextView.textChanges(edtPwd)
+                .subscribe(charSequence -> tilPwd.setErrorEnabled(false));
+
+        RxView.clicks(btnLogin)
+                .map(o -> {
+                    if (TextUtils.isEmpty(edtPwd.getText().toString().trim())) {
+                        tilPwd.setError("密码不能为空");
+                        return false;
+                    } else {
+                        return true;
+                    }
+                })
+                .subscribe(aBoolean -> {
+                    if (aBoolean) login();
+                });
+
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+
+    private void login() {
+
     }
 
     @Override
