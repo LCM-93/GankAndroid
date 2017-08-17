@@ -1,10 +1,12 @@
 package com.lcm.app.ui.activity.login;
 
 
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.RegexUtils;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -12,6 +14,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent;
 import com.lcm.android.base.BaseActivity;
 import com.lcm.app.R;
+import com.lcm.app.ui.activity.register.RegisterActivity;
 
 import butterknife.BindView;
 import io.reactivex.annotations.NonNull;
@@ -32,6 +35,8 @@ public class LoginActivity extends BaseActivity {
     TextInputLayout tilPwd;
     @BindView(R.id.btn_login)
     Button btnLogin;
+    @BindView(R.id.tv_register)
+    TextView tvRegister;
 
     @Override
     protected int rootView() {
@@ -73,6 +78,8 @@ public class LoginActivity extends BaseActivity {
                     if (aBoolean) login();
                 });
 
+        RxView.clicks(tvRegister)
+                .subscribe(o -> startActivity(new Intent(this, RegisterActivity.class)));
 
     }
 

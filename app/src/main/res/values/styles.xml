@@ -21,5 +21,10 @@
         <item name="tabIndicatorColor">@color/colorPrimary</item>
     </style>
 
+    <style name="toolbar_white_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:actionBarSize">46dp</item>
+    </style>
+
 
 </resources>
