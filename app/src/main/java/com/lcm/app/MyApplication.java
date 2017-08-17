@@ -27,7 +27,7 @@ public class MyApplication extends BaseApplication {
         AVOSCloud.initialize(this,"3e07B9fNB8M0nJ1IWHKdlygm-gzGzoHsz","0jJfWeVCD2drFqQXqvVzkFJb");
         AVOSCloud.setDebugLogEnabled(true);
 
-        
+
         Utils.init(getApplicationContext());
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(getAppModule())
