@@ -28,6 +28,7 @@ public class RegisterPresenter extends BaseMvpPresenter<RegisterView> {
 
 
     public void register(String email, String userName, String pwd) {
+        getmMvpView().showLoading();
         AVUser avUser = new AVUser();
         avUser.setEmail(email);
         avUser.setUsername(userName);
@@ -35,11 +36,15 @@ public class RegisterPresenter extends BaseMvpPresenter<RegisterView> {
         avUser.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(AVException e) {
+                getmMvpView().hideLoading();
+
                 if (e == null) {
                     SnackbarUtils.with(getmMvpView().getSankBarRootView())
                             .setMessage("注册成功啦 ！（*＾ワ＾*）")
                             .setBgColor(Color.parseColor("#a0000000"))
                             .show();
+
+                    getmMvpView().finishView();
                 } else {
                     SnackbarUtils.with(getmMvpView().getSankBarRootView())
                             .setMessage("竟然失败了 ！ヽ(‘⌒´メ)ノ")

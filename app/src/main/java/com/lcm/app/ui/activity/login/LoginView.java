@@ -11,4 +11,9 @@ import com.lcm.android.mvp.BaseView;
  */
 
 public interface LoginView extends BaseView{
+
+    void showLoading();
+
+    void hideLoading();
+
 }

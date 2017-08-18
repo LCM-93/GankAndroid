@@ -17,4 +17,8 @@ public interface RegisterView extends BaseView {
 
     void registerError(int code);
 
+
+    void showLoading();
+
+    void hideLoading();
 }

@@ -25,17 +25,22 @@ import android.widget.TextView;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.SaveCallback;
+import com.avos.avoscloud.feedback.FeedbackAgent;
+import com.blankj.utilcode.util.SPUtils;
 import com.bumptech.glide.Glide;
 import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;
 import com.lcm.app.dagger.component.AppComponent;
 import com.lcm.app.dagger.component.DaggerActivityComponent;
+import com.lcm.app.data.Contract;
+import com.lcm.app.ui.activity.feedback.FeedBackActivity;
 import com.lcm.app.ui.activity.login.LoginActivity;
 import com.lcm.app.ui.activity.search.SearchActivity;
 import com.lcm.app.ui.fragment.allgank.AllGankFragment;
 import com.lcm.app.ui.fragment.recent.RecentFragment;
 
 import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +78,8 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     private ImageView ivHeaderBg, ivUserIcon;
     private TextView tvUserName, tvUserEmail;
     private LinearLayout layoutUser;
+
+    private boolean isLogin;
 
     @Override
     protected int rootView() {
@@ -117,12 +124,11 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.frame_layout, fragmentList.get(currentIndex)).commit();
 
-
         if (imgUrl != null) {
             Glide.with(this).load(imgUrl)
                     .placeholder(R.mipmap.ic_launcher)
                     .error(R.mipmap.ic_launcher)
-                    .bitmapTransform(new BlurTransformation(this))
+                    .bitmapTransform(new BlurTransformation(this,80))
                     .into(ivHeaderBg);
         }
 
@@ -132,9 +138,23 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
     @Override
     protected void initData() {
+        EventBus.getDefault().register(this);
+        isLogin = SPUtils.getInstance(Contract.SPNAME).getBoolean(Contract.ISLOGIN, false);
+        updateUserInfo();
+
         navigation.setNavigationItemSelectedListener(this);
         toolbar.setOnMenuItemClickListener(this);
         layoutUser.setOnClickListener(this);
+    }
+
+    private void updateUserInfo() {
+        tvUserEmail.setVisibility(isLogin ? View.VISIBLE : View.GONE);
+        if (isLogin) {
+            tvUserEmail.setText(SPUtils.getInstance(Contract.SPNAME).getString(Contract.USEREMAIL));
+            tvUserName.setText(SPUtils.getInstance(Contract.SPNAME).getString(Contract.USERNAME));
+        } else {
+            tvUserName.setText("登录／注册");
+        }
     }
 
 
@@ -156,6 +176,12 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_base_toolbar, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Subscriber(tag = "Login")
+    public void login(String str) {
+        isLogin = true;
+        updateUserInfo();
     }
 
 
@@ -192,9 +218,13 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                 break;
 
             case R.id.menu_recommend_gank:
-                setFragment(0);
+//                setFragment(0);
                 drawerLayout.closeDrawers();
-                floatingButton.setVisibility(View.GONE);
+//                floatingButton.setVisibility(View.GONE);
+                startActivity(new Intent(this, FeedBackActivity.class));
+//                FeedbackAgent agent = new FeedbackAgent(getActivityContext());
+//                agent.startDefaultThreadActivity();
+
                 break;
 
             case R.id.menu_about:
@@ -222,7 +252,9 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         switch (v.getId()) {
             case R.id.layout_user:
                 drawerLayout.closeDrawers();
-                startActivity(new Intent(this, LoginActivity.class));
+                if (!isLogin) {
+                    startActivity(new Intent(this, LoginActivity.class));
+                }
                 break;
         }
     }

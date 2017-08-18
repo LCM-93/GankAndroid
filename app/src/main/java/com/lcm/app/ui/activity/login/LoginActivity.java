@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.RegexUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;
 import com.lcm.app.dagger.component.AppComponent;
@@ -38,6 +39,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     TextView tvRegister;
     @BindView(R.id.iv_close)
     ImageView ivClose;
+    private KProgressHUD hud;
 
     @Override
     protected int rootView() {
@@ -86,8 +88,6 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     }
 
 
-
-
     @Override
     protected void initData() {
 
@@ -100,6 +100,16 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
                 .appComponent(appComponent)
                 .build()
                 .inject(this);
+    }
+
+    @Override
+    public void showLoading() {
+        hud = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE);
+    }
+
+    @Override
+    public void hideLoading() {
+        if (hud != null && hud.isShowing()) hud.dismiss();
     }
 }
 

@@ -15,6 +15,7 @@ import android.widget.Button;
 import com.blankj.utilcode.util.RegexUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.lcm.android.base.BaseActivity;
 import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;
@@ -50,6 +51,7 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
     TextInputLayout tilPwd;
     @BindView(R.id.btn_register)
     Button btnRegister;
+    private KProgressHUD hud;
 
 
     @Override
@@ -153,5 +155,15 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
         } else if (code == 203) {
             tilEmail.setError("邮箱已存在！");
         }
+    }
+
+    @Override
+    public void showLoading() {
+        hud = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE);
+    }
+
+    @Override
+    public void hideLoading() {
+        if (hud != null && hud.isShowing()) hud.dismiss();
     }
 }

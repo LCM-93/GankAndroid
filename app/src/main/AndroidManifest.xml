@@ -67,6 +67,21 @@
             android:screenOrientation="portrait">
 
         </activity>
+
+        <activity
+            android:name=".ui.activity.feedback.FeedBackActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+
+        <!-- 反馈组件（需要加入以下声明）START -->
+        <activity
+            android:name="com.avos.avoscloud.feedback.ThreadActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
     </application>
 
 </manifest>

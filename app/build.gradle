@@ -68,7 +68,7 @@ dependencies {
     releaseCompile rootProject.ext.dependencies["canary-release"]
     testCompile rootProject.ext.dependencies["canary-release"]
 
-    compile 'com.kaopiz:kprogresshud:1.0.5'
+    compile 'com.kaopiz:kprogresshud:1.1.0'
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.4.3'
     compile 'org.jsoup:jsoup:1.10.2'
@@ -79,5 +79,8 @@ dependencies {
 
     // LeanCloud 基础包
     compile ('cn.leancloud.android:avoscloud-sdk:v4.4.4')
+
+    // LeanCloud 用户反馈包
+    compile ('cn.leancloud.android:avoscloud-feedback:v4.4.4@aar')
 
 }
