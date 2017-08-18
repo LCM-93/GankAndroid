@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -28,6 +30,7 @@ import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;
 import com.lcm.app.dagger.component.AppComponent;
 import com.lcm.app.dagger.component.DaggerActivityComponent;
+import com.lcm.app.ui.activity.login.LoginActivity;
 import com.lcm.app.ui.activity.search.SearchActivity;
 import com.lcm.app.ui.fragment.allgank.AllGankFragment;
 import com.lcm.app.ui.fragment.recent.RecentFragment;
@@ -42,7 +45,7 @@ import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 
-public class MainActivity extends MvpActivity<MainPresenter> implements MainView, NavigationView.OnNavigationItemSelectedListener, Toolbar.OnMenuItemClickListener {
+public class MainActivity extends MvpActivity<MainPresenter> implements MainView, NavigationView.OnNavigationItemSelectedListener, Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
 
     @BindView(R.id.toolbar)
@@ -59,6 +62,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     @BindView(R.id.floating_button)
     FloatingActionButton floatingButton;
 
+
     private List<Fragment> fragmentList;
     private ActionBarDrawerToggle mDrawerToggle;
     private int currentIndex = 0;
@@ -66,7 +70,9 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     private FragmentTransaction fragmentTransaction;
 
     private String imgUrl;
-    private ImageView ivHeader;
+    private ImageView ivHeaderBg, ivUserIcon;
+    private TextView tvUserName, tvUserEmail;
+    private LinearLayout layoutUser;
 
     @Override
     protected int rootView() {
@@ -102,7 +108,11 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         drawerLayout.addDrawerListener(mDrawerToggle);
 
         View headerView = navigation.getHeaderView(0);
-        ivHeader = (ImageView) headerView.findViewById(R.id.iv_header);
+        ivHeaderBg = (ImageView) headerView.findViewById(R.id.iv_header_bg);
+        ivUserIcon = (ImageView) headerView.findViewById(R.id.iv_user_icon);
+        tvUserName = (TextView) headerView.findViewById(R.id.tv_user_name);
+        tvUserEmail = (TextView) headerView.findViewById(R.id.tv_user_email);
+        layoutUser = (LinearLayout) headerView.findViewById(R.id.layout_user);
 
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.frame_layout, fragmentList.get(currentIndex)).commit();
@@ -113,9 +123,8 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                     .placeholder(R.mipmap.ic_launcher)
                     .error(R.mipmap.ic_launcher)
                     .bitmapTransform(new BlurTransformation(this))
-                    .into(ivHeader);
+                    .into(ivHeaderBg);
         }
-
 
 
     }
@@ -125,6 +134,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     protected void initData() {
         navigation.setNavigationItemSelectedListener(this);
         toolbar.setOnMenuItemClickListener(this);
+        layoutUser.setOnClickListener(this);
     }
 
 
@@ -205,5 +215,15 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                 break;
         }
         return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.layout_user:
+                drawerLayout.closeDrawers();
+                startActivity(new Intent(this, LoginActivity.class));
+                break;
+        }
     }
 }

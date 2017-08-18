@@ -3,6 +3,7 @@ package com.lcm.app.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.lcm.android.mvp.BaseMvpActivity;
@@ -22,6 +23,8 @@ import com.lcm.app.dagger.component.AppComponent;
 public abstract class MvpActivity<P extends BaseMvpPresenter>  extends BaseMvpActivity<P> implements BaseView{
 
     protected MyApplication application;
+    protected View snackBarRootView;
+
     @Override
     public void showMessage(String str) {
         ToastUtils.showShort(str);
@@ -43,6 +46,7 @@ public abstract class MvpActivity<P extends BaseMvpPresenter>  extends BaseMvpAc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter.onAttachView(this);
+        snackBarRootView = findViewById(android.R.id.content);
     }
     @Override
     protected void ComponentInject() {
@@ -61,5 +65,10 @@ public abstract class MvpActivity<P extends BaseMvpPresenter>  extends BaseMvpAc
     @Override
     public Context getActivityContext() {
         return this;
+    }
+
+    @Override
+    public View getSankBarRootView(){
+        return snackBarRootView;
     }
 }

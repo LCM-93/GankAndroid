@@ -6,29 +6,28 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.RegexUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
-import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent;
-import com.lcm.android.base.BaseActivity;
 import com.lcm.app.R;
+import com.lcm.app.base.MvpActivity;
+import com.lcm.app.dagger.component.AppComponent;
+import com.lcm.app.dagger.component.DaggerActivityComponent;
 import com.lcm.app.ui.activity.register.RegisterActivity;
 
 import butterknife.BindView;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginView {
 
 
-    @BindView(R.id.edt_email)
-    TextInputEditText edtEmail;
-    @BindView(R.id.til_email)
-    TextInputLayout tilEmail;
+    @BindView(R.id.edt_userName)
+    TextInputEditText edtUserName;
+    @BindView(R.id.til_userName)
+    TextInputLayout tilUserName;
     @BindView(R.id.edt_pwd)
     TextInputEditText edtPwd;
     @BindView(R.id.til_pwd)
@@ -37,6 +36,8 @@ public class LoginActivity extends BaseActivity {
     Button btnLogin;
     @BindView(R.id.tv_register)
     TextView tvRegister;
+    @BindView(R.id.iv_close)
+    ImageView ivClose;
 
     @Override
     protected int rootView() {
@@ -47,46 +48,45 @@ public class LoginActivity extends BaseActivity {
     protected void initView() {
 
 
-        RxView.focusChanges(edtEmail)
-                .map(aBoolean -> {
-                    if (!aBoolean) {
-                        return RegexUtils.isEmail(edtEmail.getText().toString().trim());
-                    }
-                    return aBoolean;
-                })
-                .subscribe(aBoolean -> {
-                    if (!aBoolean) {
-                        tilEmail.setError("请输入正确的邮箱");
-                    } else {
-                        tilEmail.setErrorEnabled(false);
-                    }
-                });
-
-        RxTextView.textChanges(edtPwd)
-                .subscribe(charSequence -> tilPwd.setErrorEnabled(false));
-
+        RxTextView.textChanges(edtUserName).subscribe(charSequence ->
+                tilUserName.setErrorEnabled(false)
+        );
+        RxTextView.textChanges(edtPwd).subscribe(charSequence ->
+                tilPwd.setErrorEnabled(false)
+        );
         RxView.clicks(btnLogin)
                 .map(o -> {
+                    if (TextUtils.isEmpty(edtUserName.getText().toString().trim())) {
+                        tilUserName.setError("用户名不能为空！");
+                        return false;
+                    } else {
+                        return true;
+                    }
+                })
+                .map(aBoolean -> {
+                    if (!aBoolean) return aBoolean;
                     if (TextUtils.isEmpty(edtPwd.getText().toString().trim())) {
-                        tilPwd.setError("密码不能为空");
+                        tilPwd.setError("密码不能为空！");
                         return false;
                     } else {
                         return true;
                     }
                 })
                 .subscribe(aBoolean -> {
-                    if (aBoolean) login();
+                    if (aBoolean)
+                        mPresenter.login(edtUserName.getText().toString().trim(), edtPwd.getText().toString().trim());
                 });
+
 
         RxView.clicks(tvRegister)
                 .subscribe(o -> startActivity(new Intent(this, RegisterActivity.class)));
 
-    }
-
-
-    private void login() {
+        RxView.clicks(ivClose).subscribe(o -> finish());
 
     }
+
+
+
 
     @Override
     protected void initData() {
@@ -94,5 +94,12 @@ public class LoginActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+        DaggerActivityComponent.builder()
+                .appComponent(appComponent)
+                .build()
+                .inject(this);
+    }
 }
 

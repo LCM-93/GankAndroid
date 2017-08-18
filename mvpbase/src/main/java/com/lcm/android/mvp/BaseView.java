@@ -1,6 +1,7 @@
 package com.lcm.android.mvp;
 
 import android.content.Context;
+import android.view.View;
 
 /**
  * ****************************************************************
@@ -18,4 +19,6 @@ public interface BaseView<T> {
     void showEmpty();
 
     void finishView();
+
+    View getSankBarRootView();
 }

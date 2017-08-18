@@ -73,6 +73,8 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
         layoutEmpty.setVisibility(View.VISIBLE);
     }
 
+
+
     @Override
     protected int rootView() {
         return R.layout.fragment_recent;

@@ -7,12 +7,85 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
+        style="@style/toolbar_white_theme"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
-        style="@style/toolbar_white_theme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
     </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingTop="30dp">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="6dp"
+                android:hint="邮箱"
+                android:inputType="textEmailAddress"
+                android:textSize="14sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edt_userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="6dp"
+                android:hint="用户名"
+                android:inputType="text"
+                android:textSize="14sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edt_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="6dp"
+                android:hint="密码"
+                android:inputType="textPassword"
+                android:textSize="14sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_bg_login"
+            android:text="注  册"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
 
 </LinearLayout>
