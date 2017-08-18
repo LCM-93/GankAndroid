@@ -159,7 +159,7 @@ public class RegisterActivity extends MvpActivity<RegisterPresenter> implements 
 
     @Override
     public void showLoading() {
-        hud = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE);
+        hud = KProgressHUD.create(this).setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).show();
     }
 
     @Override
