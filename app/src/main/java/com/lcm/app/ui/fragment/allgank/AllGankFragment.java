@@ -37,7 +37,7 @@ public class AllGankFragment extends BaseFragment {
     private MyFragmentAdapter mAdapter;
 
     private String[] typeList = new String[]{GankImpl.GankType.All, GankImpl.GankType.Android, GankImpl.GankType.IOS, GankImpl.GankType.Web, GankImpl.GankType.Video,
-            GankImpl.GankType.Extra, GankImpl.GankType.Random_Recommend, GankImpl.GankType.Welfare};
+            GankImpl.GankType.Extra, GankImpl.GankType.Random_Recommend};
 
     public static AllGankFragment newInstance() {
 

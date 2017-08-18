@@ -13,6 +13,11 @@
         android:title="分类阅读"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/menu_welfare"
+        android:title="福利满满"
+        app:showAsAction="always" />
+
     <!--<item android:id="@+id/menu_recommend_gank"-->
     <!--android:title="精品推荐"-->
     <!--app:showAsAction="always"/>-->

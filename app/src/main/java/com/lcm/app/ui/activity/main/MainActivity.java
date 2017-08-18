@@ -39,6 +39,7 @@ import com.lcm.app.ui.activity.search.SearchActivity;
 import com.lcm.app.ui.activity.web.WebActivity;
 import com.lcm.app.ui.fragment.allgank.AllGankFragment;
 import com.lcm.app.ui.fragment.recent.RecentFragment;
+import com.lcm.app.ui.fragment.welfare.WelfareFragment;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
@@ -94,6 +95,8 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         fragmentList = new ArrayList<>();
         fragmentList.add(RecentFragment.newInstance());
         fragmentList.add(AllGankFragment.newInstance());
+        fragmentList.add(WelfareFragment.newInstance());
+
         toolbar.setTitle(R.string.app_name);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         toolbar.inflateMenu(R.menu.menu_base_toolbar);
@@ -218,6 +221,12 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                 floatingButton.setVisibility(View.GONE);
                 break;
 
+            case R.id.menu_welfare:
+                setFragment(2);
+                drawerLayout.closeDrawers();
+                floatingButton.setVisibility(View.GONE);
+                break;
+
             case R.id.menu_feedback:
                 drawerLayout.closeDrawers();
                 if (!isLogin) {
@@ -230,7 +239,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
             case R.id.menu_about_me:
                 drawerLayout.closeDrawers();
                 Intent intent = new Intent(this, WebActivity.class);
-                intent.putExtra("url","http://lichenming.com");
+                intent.putExtra("url", "http://lichenming.com");
                 startActivity(intent);
                 break;
 
@@ -241,6 +250,8 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                 EventBus.getDefault().post("Logout", "Logout");
                 updateUserInfo();
                 break;
+
+
         }
         return false;
     }
