@@ -1,6 +1,8 @@
 package com.lcm.app.ui.activity.login;
 
 import android.graphics.Color;
+import android.view.View;
+import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
@@ -13,7 +15,11 @@ import com.lcm.app.data.Contract;
 
 import org.simple.eventbus.EventBus;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
 
 /**
  * ****************************************************************
@@ -39,10 +45,7 @@ public class LoginPresenter extends BaseMvpPresenter<LoginView> {
                 getmMvpView().hideLoading();
 
                 if (e == null) {
-                    SnackbarUtils.with(getmMvpView().getSankBarRootView())
-                            .setMessage("登录成功啦 ！（*＾ワ＾*）")
-                            .setBgColor(Color.parseColor("#a0000000"))
-                            .show();
+
                     LogUtils.e("LoginPresenter", "email:::" + avUser.getEmail());
                     LogUtils.e("LoginPresenter", "userName:::" + avUser.getUsername());
 
@@ -52,14 +55,21 @@ public class LoginPresenter extends BaseMvpPresenter<LoginView> {
 
                     EventBus.getDefault().post("Login", "Login");
 
-                    getmMvpView().finishView();
+                    SnackbarUtils.with(getmMvpView().getSankBarRootView())
+                            .setMessage("登录成功啦 ！（*＾ワ＾*）")
+                            .setAction("朕知道了", v -> getmMvpView().finishView())
+                            .setDuration(SnackbarUtils.LENGTH_LONG)
+                            .showSuccess();
+
+                    Observable.timer(3000,TimeUnit.MILLISECONDS)
+                            .subscribe(aLong -> getmMvpView().finishView());
+
 
                 } else {
                     SnackbarUtils.with(getmMvpView().getSankBarRootView())
                             .setMessage("登录失败了 ！ヽ(‘⌒´メ)ノ")
-                            .setMessageColor(Color.parseColor("#FF0006"))
-                            .setBgColor(Color.parseColor("#a0000000"))
-                            .show();
+                            .setDuration(SnackbarUtils.LENGTH_LONG)
+                            .showError();
                 }
 
             }

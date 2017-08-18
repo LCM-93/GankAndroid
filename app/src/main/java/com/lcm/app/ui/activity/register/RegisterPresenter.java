@@ -10,7 +10,11 @@ import com.blankj.utilcode.util.SnackbarUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.lcm.android.mvp.BaseMvpPresenter;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
 
 /**
  * ****************************************************************
@@ -41,16 +45,18 @@ public class RegisterPresenter extends BaseMvpPresenter<RegisterView> {
                 if (e == null) {
                     SnackbarUtils.with(getmMvpView().getSankBarRootView())
                             .setMessage("注册成功啦 ！（*＾ワ＾*）")
-                            .setBgColor(Color.parseColor("#a0000000"))
-                            .show();
+                            .setAction("朕知道了", v -> getmMvpView().finishView())
+                            .setDuration(SnackbarUtils.LENGTH_LONG)
+                            .showSuccess();
 
-                    getmMvpView().finishView();
+                    Observable.timer(3000, TimeUnit.MILLISECONDS)
+                            .subscribe(aLong -> getmMvpView().finishView());
+
                 } else {
                     SnackbarUtils.with(getmMvpView().getSankBarRootView())
                             .setMessage("竟然失败了 ！ヽ(‘⌒´メ)ノ")
-                            .setMessageColor(Color.parseColor("#FF0006"))
-                            .setBgColor(Color.parseColor("#a0000000"))
-                            .show();
+                            .setDuration(SnackbarUtils.LENGTH_LONG)
+                            .showError();
                     getmMvpView().registerError(e.getCode());
                     LogUtils.e("RegisterPresenter", "code::" + e.getCode() + "    message::" + e.getMessage());
                 }

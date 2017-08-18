@@ -5,24 +5,39 @@
 
     <item
         android:id="@+id/menu_recent_gank"
-        android:icon="@mipmap/iv_bottom_home"
-        android:title="最新Gank"
+        android:title="最新干货"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_all_gank"
-        android:icon="@mipmap/iv_bottom_type"
         android:title="分类阅读"
         app:showAsAction="always" />
 
-    <item android:id="@+id/menu_recommend_gank"
-        android:icon="@mipmap/iv_bottom_recommend"
-        android:title="精品推荐"
-        app:showAsAction="always"/>
+    <!--<item android:id="@+id/menu_recommend_gank"-->
+    <!--android:title="精品推荐"-->
+    <!--app:showAsAction="always"/>-->
 
-    <item android:id="@+id/menu_about"
-        android:icon="@mipmap/iv_bottom_about"
-        android:title="关于我们"
-        app:showAsAction="always"
-        />
+    <!--<item android:id="@+id/menu_about"-->
+    <!--android:title="关于我们"-->
+    <!--app:showAsAction="always"-->
+    <!--/>-->
+
+    <group android:id="@+id/menu_group1">
+        <item
+            android:id="@+id/menu_feedback"
+            android:title="意见反馈"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/menu_about_me"
+            android:title="关于我"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/menu_logout"
+            android:title="退出登录"
+            app:showAsAction="always" />
+
+
+    </group>
 </menu>

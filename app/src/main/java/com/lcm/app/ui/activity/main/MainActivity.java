@@ -36,6 +36,7 @@ import com.lcm.app.data.Contract;
 import com.lcm.app.ui.activity.feedback.FeedBackActivity;
 import com.lcm.app.ui.activity.login.LoginActivity;
 import com.lcm.app.ui.activity.search.SearchActivity;
+import com.lcm.app.ui.activity.web.WebActivity;
 import com.lcm.app.ui.fragment.allgank.AllGankFragment;
 import com.lcm.app.ui.fragment.recent.RecentFragment;
 
@@ -128,7 +129,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
             Glide.with(this).load(imgUrl)
                     .placeholder(R.mipmap.ic_launcher)
                     .error(R.mipmap.ic_launcher)
-                    .bitmapTransform(new BlurTransformation(this,80))
+                    .bitmapTransform(new BlurTransformation(this, 80))
                     .into(ivHeaderBg);
         }
 
@@ -217,20 +218,28 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                 floatingButton.setVisibility(View.GONE);
                 break;
 
-            case R.id.menu_recommend_gank:
-//                setFragment(0);
+            case R.id.menu_feedback:
                 drawerLayout.closeDrawers();
-//                floatingButton.setVisibility(View.GONE);
-                startActivity(new Intent(this, FeedBackActivity.class));
-//                FeedbackAgent agent = new FeedbackAgent(getActivityContext());
-//                agent.startDefaultThreadActivity();
-
+                if (!isLogin) {
+                    startActivity(new Intent(this, LoginActivity.class));
+                } else {
+                    startActivity(new Intent(this, FeedBackActivity.class));
+                }
                 break;
 
-            case R.id.menu_about:
-                setFragment(0);
+            case R.id.menu_about_me:
                 drawerLayout.closeDrawers();
-                floatingButton.setVisibility(View.GONE);
+                Intent intent = new Intent(this, WebActivity.class);
+                intent.putExtra("url","http://lichenming.com");
+                startActivity(intent);
+                break;
+
+            case R.id.menu_logout:
+                drawerLayout.closeDrawers();
+                isLogin = false;
+                SPUtils.getInstance(Contract.SPNAME).put(Contract.ISLOGIN, false);
+                EventBus.getDefault().post("Logout", "Logout");
+                updateUserInfo();
                 break;
         }
         return false;
