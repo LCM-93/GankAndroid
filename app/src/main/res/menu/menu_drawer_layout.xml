@@ -6,34 +6,40 @@
     <item
         android:id="@+id/menu_recent_gank"
         android:title="最新干货"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:icon="@mipmap/iv_menu_recent"/>
 
     <item
         android:id="@+id/menu_all_gank"
         android:title="分类阅读"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:icon="@mipmap/iv_menu_type_gank"/>
 
     <item
         android:id="@+id/menu_welfare"
         android:title="福利满满"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:icon="@mipmap/iv_menu_welfare"/>
 
 
     <group android:id="@+id/menu_group1">
         <item
             android:id="@+id/menu_feedback"
             android:title="意见反馈"
-            app:showAsAction="always" />
+            app:showAsAction="always"
+            android:icon="@mipmap/iv_menu_feedback"/>
 
         <item
             android:id="@+id/menu_about_me"
             android:title="关于我"
-            app:showAsAction="always" />
+            app:showAsAction="always"
+            android:icon="@mipmap/iv_menu_about_me"/>
 
         <item
             android:id="@+id/menu_logout"
             android:title="退出登录"
-            app:showAsAction="always" />
+            app:showAsAction="always"
+            android:icon="@mipmap/iv_menu_logout"/>
 
 
     </group>
