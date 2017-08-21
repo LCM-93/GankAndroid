@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
@@ -55,9 +56,11 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
     @BindView(R.id.layout_empty)
     LinearLayout layoutEmpty;
 
+
     private List<DailyContentBean> dailyContentBeanList;
     private View headerView;
     private ImageView headerImage;
+    private TextView tvTime;
     private DatePickerDialog datePickerDialog;
     private DailyContentBean headerDailyContent;
 
@@ -71,8 +74,9 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
     @Override
     public void showEmpty() {
         layoutEmpty.setVisibility(View.VISIBLE);
+        layoutEmpty.setOnClickListener(v -> {
+        });
     }
-
 
 
     @Override
@@ -100,19 +104,21 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
 
         headerView = View.inflate(getContext(), R.layout.header_recent_list, null);
         headerImage = (ImageView) headerView.findViewById(R.id.iv_header);
+        tvTime = (TextView) headerView.findViewById(R.id.tv_time);
         headerView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) DeviceUtils.dpToPixel(getContext(), 200)));
         rcvAdapterWrapper.setHeaderView(headerView);
         recyclerView.setAdapter(rcvAdapterWrapper);
 
         datePickerDialog = DatePickerDialog.newInstance(((view, year, monthOfYear, dayOfMonth) -> {
-            mPresenter.getDailyData(year + "", monthOfYear + "", dayOfMonth + "");
+            LogUtils.e("lcm", "选择日期：：：" + year + "  " + (monthOfYear + 1) + "  " + dayOfMonth);
+            mPresenter.getDailyData(String.valueOf(year), String.valueOf(monthOfYear + 1), String.valueOf(dayOfMonth), false);
             swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
         }));
     }
 
     @Override
     protected void initData() {
-        mPresenter.getHistoryDate();
+        mPresenter.loadToday();
         headerImage.setOnClickListener(this);
     }
 
@@ -130,12 +136,12 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
         layoutEmpty.setVisibility(View.GONE);
         dailyContentBeanList.clear();
         dailyContentBeanList.addAll(dailyContentBeen);
-        LogUtils.e("lcm", dailyContentBeanList.toString());
+//        LogUtils.e("lcm", dailyContentBeanList.toString());
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     @Override
-    public void setHeaderView(DailyContentBean dailyContentBean) {
+    public void setHeaderView(DailyContentBean dailyContentBean, String time) {
         headerDailyContent = dailyContentBean;
         Glide.with(this)
                 .load(dailyContentBean.getSrc())
@@ -143,6 +149,9 @@ public class RecentFragment extends MvpFragment<RecentPresenter> implements Rece
                 .error(R.mipmap.iv_place_holder)
                 .animate(R.anim.enlarge)
                 .into(headerImage);
+
+        tvTime.setVisibility(View.VISIBLE);
+        tvTime.setText(time);
     }
 
 

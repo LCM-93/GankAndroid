@@ -17,7 +17,7 @@ public interface  RecentView extends BaseView {
 
     void refreshDailySuccess(List<DailyContentBean> dailyContentBeen);
 
-    void setHeaderView(DailyContentBean dailyContentBean);
+    void setHeaderView(DailyContentBean dailyContentBean,String time);
 
     void showRefresh(boolean show);
 
