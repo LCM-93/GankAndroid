@@ -3,12 +3,16 @@ package com.lcm.app;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.lcm.app.data.entity.DailyContentBean;
+import com.lcm.app.data.entity.ExcerptBean;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +36,52 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.lcm.app", appContext.getPackageName());
     }
+
+
+    @Test
+    public void rmTest() throws Exception{
+        Document document = Jsoup.connect("http://www.52rkl.cn/jiecao/12131093S2015.html").get();
+        Element header = document.removeClass("header");
+        Element element = document.removeClass("relates panel");
+        document.toString();
+    }
+
+    @Test
+    public void jpTest() throws Exception{
+        List<ExcerptBean> excerptList = new ArrayList<>();
+        Document document = Jsoup.connect("http://www.52rkl.cn/sansanyougeng/").get();
+        Elements excerpts = document.getElementsByClass("excerpt");
+        LogUtils.e("lcm",excerpts.toString());
+        for (Element excerpt : excerpts) {
+            ExcerptBean excerptBean = new ExcerptBean();
+
+            Element a = excerpt.select("a").first();
+
+            String url = a.attr("href");
+
+            String img = a.select("img").first().attr("src");
+
+            String title = excerpt.select("h2").first().select("a").text();
+
+            String time = excerpt.select("time").first().text();
+
+            String cat = excerpt.getElementsByClass("cat").first().text();
+
+            String note = excerpt.select("p").first().select("a").first().text();
+
+            excerptBean.setUrl(url);
+            excerptBean.setImg(img);
+            excerptBean.setTitle(title);
+            excerptBean.setUpdateTime(time);
+            excerptBean.setCat(cat);
+            excerptBean.setNote(note);
+            excerptList.add(excerptBean);
+        }
+
+        LogUtils.e("lcm", excerptList.toString());
+
+    }
+
 
     @Test
     public void jouspTest() throws Exception {

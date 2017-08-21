@@ -38,6 +38,7 @@ import com.lcm.app.ui.activity.login.LoginActivity;
 import com.lcm.app.ui.activity.search.SearchActivity;
 import com.lcm.app.ui.activity.web.WebActivity;
 import com.lcm.app.ui.fragment.allgank.AllGankFragment;
+import com.lcm.app.ui.fragment.funny.FunnyFragment;
 import com.lcm.app.ui.fragment.recent.RecentFragment;
 import com.lcm.app.ui.fragment.welfare.WelfareFragment;
 
@@ -96,6 +97,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         fragmentList.add(RecentFragment.newInstance());
         fragmentList.add(AllGankFragment.newInstance());
         fragmentList.add(WelfareFragment.newInstance());
+        fragmentList.add(FunnyFragment.newInstance());
 
         toolbar.setTitle(R.string.app_name);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
@@ -223,6 +225,12 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
             case R.id.menu_welfare:
                 setFragment(2);
+                drawerLayout.closeDrawers();
+                floatingButton.setVisibility(View.GONE);
+                break;
+
+            case R.id.menu_funny:
+                setFragment(3);
                 drawerLayout.closeDrawers();
                 floatingButton.setVisibility(View.GONE);
                 break;

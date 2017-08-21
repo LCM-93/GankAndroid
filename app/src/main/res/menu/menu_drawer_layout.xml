@@ -5,41 +5,47 @@
 
     <item
         android:id="@+id/menu_recent_gank"
+        android:icon="@mipmap/iv_menu_recent"
         android:title="最新干货"
-        app:showAsAction="always"
-        android:icon="@mipmap/iv_menu_recent"/>
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_all_gank"
+        android:icon="@mipmap/iv_menu_type_gank"
         android:title="分类阅读"
-        app:showAsAction="always"
-        android:icon="@mipmap/iv_menu_type_gank"/>
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_welfare"
+        android:icon="@mipmap/iv_menu_welfare"
         android:title="福利满满"
-        app:showAsAction="always"
-        android:icon="@mipmap/iv_menu_welfare"/>
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_funny"
+        android:icon="@mipmap/iv_menu_funny"
+        android:title="开心一刻"
+        app:showAsAction="always" />
 
 
     <group android:id="@+id/menu_group1">
         <item
             android:id="@+id/menu_feedback"
+            android:icon="@mipmap/iv_menu_feedback"
             android:title="意见反馈"
-            app:showAsAction="always"
-            android:icon="@mipmap/iv_menu_feedback"/>
+            app:showAsAction="always" />
 
         <item
             android:id="@+id/menu_about_me"
+            android:icon="@mipmap/iv_menu_about_me"
             android:title="关于我"
-            app:showAsAction="always"
-            android:icon="@mipmap/iv_menu_about_me"/>
+            app:showAsAction="always" />
 
         <item
             android:id="@+id/menu_logout"
+            android:icon="@mipmap/iv_menu_logout"
             android:title="退出登录"
-            app:showAsAction="always"
-            android:icon="@mipmap/iv_menu_logout"/>
+            app:showAsAction="always" />
 
 
     </group>

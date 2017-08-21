@@ -1,6 +1,7 @@
 package com.lcm.app.dagger.component;
 
 import com.lcm.android.dagger.scope.FragmentScope;
+import com.lcm.app.ui.fragment.funny.FunnyFragment;
 import com.lcm.app.ui.fragment.recent.RecentFragment;
 import com.lcm.app.ui.fragment.typegank.TypeGankFragment;
 import com.lcm.app.ui.fragment.welfare.WelfareFragment;
@@ -22,4 +23,6 @@ public interface FragmentComponent {
     void inject(TypeGankFragment typeGankFragment);
 
     void inject(WelfareFragment welfareFragment);
+
+    void inject(FunnyFragment funnyFragment);
 }
