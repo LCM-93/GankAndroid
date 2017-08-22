@@ -51,14 +51,14 @@ public class MyWebViewClient extends WebViewClient {
     // 页面开始加载
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        mProgressBar.setVisibility(View.VISIBLE);
+        if(mProgressBar!=null)mProgressBar.setVisibility(View.VISIBLE);
         super.onPageStarted(view, url, favicon);
     }
 
     // 页面加载完成
     @Override
     public void onPageFinished(WebView view, String url) {
-        mProgressBar.setVisibility(View.GONE);
+        if(mProgressBar!=null)mProgressBar.setVisibility(View.GONE);
         super.onPageFinished(view, url);
     }
 

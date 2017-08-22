@@ -5,6 +5,7 @@ import com.lcm.app.ui.fragment.funny.FunnyFragment;
 import com.lcm.app.ui.fragment.recent.RecentFragment;
 import com.lcm.app.ui.fragment.typegank.TypeGankFragment;
 import com.lcm.app.ui.fragment.welfare.WelfareFragment;
+import com.lcm.app.ui.fragment.zhihu.ZhihuFragment;
 
 import dagger.Component;
 
@@ -25,4 +26,6 @@ public interface FragmentComponent {
     void inject(WelfareFragment welfareFragment);
 
     void inject(FunnyFragment funnyFragment);
+
+    void inject(ZhihuFragment zhihuFragment);
 }

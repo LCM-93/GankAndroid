@@ -21,10 +21,16 @@
         android:title="福利满满"
         app:showAsAction="always" />
 
+    <!--<item-->
+        <!--android:id="@+id/menu_funny"-->
+        <!--android:icon="@mipmap/iv_menu_funny"-->
+        <!--android:title="开心一刻"-->
+        <!--app:showAsAction="always" />-->
+
     <item
-        android:id="@+id/menu_funny"
-        android:icon="@mipmap/iv_menu_funny"
-        android:title="开心一刻"
+        android:id="@+id/menu_zhihu"
+        android:icon="@mipmap/iv_menu_zhihu"
+        android:title="知乎日报"
         app:showAsAction="always" />
 
 

@@ -5,6 +5,8 @@ import com.lcm.app.data.entity.DailyBean;
 import com.lcm.app.data.entity.GankBean;
 import com.lcm.app.data.entity.HttpBaseResult;
 import com.lcm.app.data.entity.WelfareBean;
+import com.lcm.app.data.entity.ZHInfoBean;
+import com.lcm.app.data.entity.ZHNewsBean;
 
 import java.util.List;
 
@@ -62,4 +64,11 @@ public interface CommonApi {
 
     @GET
     Observable<ResponseBody> downloadPic(@Url String image_url);
+
+
+    @GET("https://news-at.zhihu.com/api/4/news/latest")
+    Observable<ZHNewsBean> getZHNews();
+
+    @GET("https://news-at.zhihu.com/api/4/news/{ID}")
+    Observable<ZHInfoBean> getZHInfo(@Path("ID") String id);
 }

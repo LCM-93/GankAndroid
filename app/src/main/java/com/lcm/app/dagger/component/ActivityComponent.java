@@ -7,6 +7,7 @@ import com.lcm.app.ui.activity.main.MainActivity;
 import com.lcm.app.ui.activity.register.RegisterActivity;
 import com.lcm.app.ui.activity.search.SearchActivity;
 import com.lcm.app.ui.activity.splash.SplashActivity;
+import com.lcm.app.ui.activity.zhihuInfo.ZHInfoActivity;
 
 import dagger.Component;
 
@@ -32,4 +33,6 @@ public interface ActivityComponent {
     void inject(LoginActivity loginActivity);
 
     void inject(RegisterActivity registerActivity);
+
+    void inject(ZHInfoActivity zhInfoActivity);
 }

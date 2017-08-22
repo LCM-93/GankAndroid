@@ -74,6 +74,12 @@
 
         </activity>
 
+        <activity
+            android:name=".ui.activity.zhihuInfo.ZHInfoActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
 
         <!-- 反馈组件（需要加入以下声明）START -->
         <activity

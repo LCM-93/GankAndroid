@@ -41,6 +41,7 @@ import com.lcm.app.ui.fragment.allgank.AllGankFragment;
 import com.lcm.app.ui.fragment.funny.FunnyFragment;
 import com.lcm.app.ui.fragment.recent.RecentFragment;
 import com.lcm.app.ui.fragment.welfare.WelfareFragment;
+import com.lcm.app.ui.fragment.zhihu.ZhihuFragment;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
@@ -97,7 +98,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         fragmentList.add(RecentFragment.newInstance());
         fragmentList.add(AllGankFragment.newInstance());
         fragmentList.add(WelfareFragment.newInstance());
-        fragmentList.add(FunnyFragment.newInstance());
+        fragmentList.add(ZhihuFragment.newInstance());
 
         toolbar.setTitle(R.string.app_name);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
@@ -212,28 +213,39 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_recent_gank:
+                toolbar.setTitle("干货集中营");
                 setFragment(0);
                 drawerLayout.closeDrawers();
                 floatingButton.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.menu_all_gank:
+                toolbar.setTitle("分类阅读");
                 setFragment(1);
                 drawerLayout.closeDrawers();
                 floatingButton.setVisibility(View.GONE);
                 break;
 
             case R.id.menu_welfare:
+                toolbar.setTitle("福利满满");
                 setFragment(2);
                 drawerLayout.closeDrawers();
                 floatingButton.setVisibility(View.GONE);
                 break;
 
-            case R.id.menu_funny:
+//            case R.id.menu_funny:
+//                setFragment(3);
+//                drawerLayout.closeDrawers();
+//                floatingButton.setVisibility(View.GONE);
+//                break;
+
+            case R.id.menu_zhihu:
+                toolbar.setTitle("知乎日报");
                 setFragment(3);
                 drawerLayout.closeDrawers();
                 floatingButton.setVisibility(View.GONE);
                 break;
+
 
             case R.id.menu_feedback:
                 drawerLayout.closeDrawers();
