@@ -23,16 +23,20 @@
 ## 效果图
 
 <figure class="half">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_a.gif" width="200">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_b.gif" width="200">
+	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/1.png" width="200">
+	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/2.png" width="200">
 </figure>
 
 <figure class="half">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_c.gif" width="200">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_d.gif" width="200">
+	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/3.png" width="200">
+	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/4.png" width="200">
 </figure>
 
-<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_e.gif" width="200">
+<figure class="half">
+	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/5.png" width="200">
+	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/6.png" width="200">
+</figure>
+
 
 
 ## 更新记录
