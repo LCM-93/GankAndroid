@@ -22,17 +22,17 @@
 
 ## 效果图
 
-<figure class="third">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_a.gif" width="300">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_b.gif" width="300">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_c.gif" width="300">
+<figure class="half">
+	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_a.gif" width="200">
+	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_b.gif" width="200">
 </figure>
-
 
 <figure class="half">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_d.gif" width="300">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_e.gif" width="300">
+	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_c.gif" width="200">
+	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_d.gif" width="200">
 </figure>
+
+<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/GankAndroid_e.gif" width="200">
 
 
 ## 更新记录
