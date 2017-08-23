@@ -2,13 +2,21 @@ package com.lcm.app.ui.fragment.zhihu;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.lcm.android.mvp.BaseMvpPresenter;
+import com.lcm.app.data.entity.ZHNewsBean;
 import com.lcm.app.data.entity.ZHTopStoriesBean;
 import com.lcm.app.data.impl.ZHImpl;
+import com.lcm.app.weight.ProgressObserver;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * ****************************************************************
@@ -46,6 +54,28 @@ public class ZhihuPresenter extends BaseMvpPresenter<ZhihuView> {
                     getmMvpView().refreshZHNews(zhNewsBean.getStories());
                     getmMvpView().refreshTopNews(zhNewsBean.getTop_stories());
 //                    LogUtils.e("lcm", zhNewsBean.toString());
+                });
+    }
+
+
+    public void getZHNews(int page) {
+        Observable.just(page-1)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(integer -> {
+                    SimpleDateFormat sp = new SimpleDateFormat("yyyyMMdd");
+                    Date date = new Date();
+                    long time = date.getTime() - integer * 24 * 60 * 60 * 1000;
+                    return sp.format(new Date(time));
+                })
+                .flatMap(s ->
+                        zh.getZHNewsByDate(s)
+                )
+                .subscribe(new ProgressObserver<ZHNewsBean>(getmMvpView().getActivityContext()){
+                    @Override
+                    public void onNext(ZHNewsBean zhNewsBean) {
+                        getmMvpView().loadMoreZHNews(zhNewsBean.getStories());
+                    }
                 });
     }
 }

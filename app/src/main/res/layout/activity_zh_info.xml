@@ -18,6 +18,8 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleGravity="left|bottom"
+            app:collapsedTitleGravity="left"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 

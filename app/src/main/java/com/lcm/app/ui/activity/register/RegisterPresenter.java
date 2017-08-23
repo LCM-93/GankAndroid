@@ -41,7 +41,6 @@ public class RegisterPresenter extends BaseMvpPresenter<RegisterView> {
             @Override
             public void done(AVException e) {
                 getmMvpView().hideLoading();
-
                 if (e == null) {
                     SnackbarUtils.with(getmMvpView().getSankBarRootView())
                             .setMessage("注册成功啦 ！（*＾ワ＾*）")
@@ -50,7 +49,7 @@ public class RegisterPresenter extends BaseMvpPresenter<RegisterView> {
                             .showSuccess();
 
                     Observable.timer(3000, TimeUnit.MILLISECONDS)
-                            .subscribe(aLong -> getmMvpView().finishView());
+                            .subscribe(aLong -> getmMvpView().finishView(),Throwable::printStackTrace);
 
                 } else {
                     SnackbarUtils.with(getmMvpView().getSankBarRootView())
@@ -58,7 +57,6 @@ public class RegisterPresenter extends BaseMvpPresenter<RegisterView> {
                             .setDuration(SnackbarUtils.LENGTH_LONG)
                             .showError();
                     getmMvpView().registerError(e.getCode());
-                    LogUtils.e("RegisterPresenter", "code::" + e.getCode() + "    message::" + e.getMessage());
                 }
             }
         });

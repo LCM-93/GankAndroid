@@ -22,5 +22,7 @@ public interface ZhihuView extends BaseView {
 
     void refreshTopNews(List<String> images, List<String> titles);
 
+    void  loadMoreZHNews(List<ZHStoriesBean> zhStoriesBeen);
+
     void showRefresh(boolean show);
 }

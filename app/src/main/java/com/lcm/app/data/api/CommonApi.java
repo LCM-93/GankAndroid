@@ -69,6 +69,9 @@ public interface CommonApi {
     @GET("https://news-at.zhihu.com/api/4/news/latest")
     Observable<ZHNewsBean> getZHNews();
 
+    @GET("https://news-at.zhihu.com/api/4/news/before/{DATE}")
+    Observable<ZHNewsBean> getZHNewsByDate(@Path("DATE") String date);
+
     @GET("https://news-at.zhihu.com/api/4/news/{ID}")
     Observable<ZHInfoBean> getZHInfo(@Path("ID") String id);
 }

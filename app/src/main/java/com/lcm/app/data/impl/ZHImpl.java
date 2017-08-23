@@ -35,4 +35,11 @@ public class ZHImpl {
                 .compose(RxHelper.rxSchedulerHelper());
     }
 
+
+    public Observable<ZHNewsBean> getZHNewsByDate(String date) {
+        return apiManager.getCommonService()
+                .getZHNewsByDate(date)
+                .compose(RxHelper.rxSchedulerHelper());
+    }
+
 }

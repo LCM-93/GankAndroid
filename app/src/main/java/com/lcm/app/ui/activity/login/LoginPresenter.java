@@ -46,9 +46,6 @@ public class LoginPresenter extends BaseMvpPresenter<LoginView> {
 
                 if (e == null) {
 
-                    LogUtils.e("LoginPresenter", "email:::" + avUser.getEmail());
-                    LogUtils.e("LoginPresenter", "userName:::" + avUser.getUsername());
-
                     SPUtils.getInstance(Contract.SPNAME).put(Contract.ISLOGIN, true);
                     SPUtils.getInstance(Contract.SPNAME).put(Contract.USERNAME, avUser.getUsername());
                     SPUtils.getInstance(Contract.SPNAME).put(Contract.USEREMAIL, avUser.getEmail());
@@ -62,7 +59,7 @@ public class LoginPresenter extends BaseMvpPresenter<LoginView> {
                             .showSuccess();
 
                     Observable.timer(3000,TimeUnit.MILLISECONDS)
-                            .subscribe(aLong -> getmMvpView().finishView());
+                            .subscribe(aLong -> getmMvpView().finishView(),Throwable::printStackTrace);
 
 
                 } else {

@@ -16,9 +16,9 @@
 
 
     <style name="MyTabLayoutStyle" parent="Base.Widget.Design.TabLayout">
-        <item name="tabBackground">@color/color_tab_bg_gray</item>
-        <item name="tabSelectedTextColor">@color/colorPrimary</item>
-        <item name="tabIndicatorColor">@color/colorPrimary</item>
+        <item name="tabBackground">@color/colorPrimary</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabIndicatorColor">@color/colorAccent</item>
     </style>
 
     <style name="toolbar_white_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">

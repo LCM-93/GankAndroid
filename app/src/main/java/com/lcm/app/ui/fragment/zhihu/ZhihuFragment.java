@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.lcm.android.utils.DeviceUtils;
 import com.lcm.app.R;
@@ -26,11 +29,15 @@ import com.lcm.app.data.entity.ZHTopStoriesBean;
 import com.lcm.app.ui.activity.zhihuInfo.ZHInfoActivity;
 import com.lcm.app.ui.item.ZHNewsItem;
 import com.lcm.app.utils.GlideImageLoader;
+import com.lcm.app.weight.listener.EndlessRecyclerOnScrollListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
+import com.youth.banner.view.BannerViewPager;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +67,9 @@ public class ZhihuFragment extends MvpFragment<ZhihuPresenter> implements ZhihuV
     private Banner banner;
     private View headerView;
     private List<ZHTopStoriesBean> zhTopStoriesBeen;
+    private EndlessRecyclerOnScrollListener endlessRecyclerOnScrollListener;
+    private LinearLayoutManager linearLayoutManager;
+    private int currentPage = 1;
 
 
     public static ZhihuFragment newInstance() {
@@ -88,17 +98,22 @@ public class ZhihuFragment extends MvpFragment<ZhihuPresenter> implements ZhihuV
 
 
         swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#009688"), Color.parseColor("#03a9f4"), Color.parseColor("#5677fc"), Color.parseColor("#673ab7"));
-        swipeRefreshLayout.setOnRefreshListener(() -> mPresenter.getZHNews());
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            mPresenter.getZHNews();
+            endlessRecyclerOnScrollListener.reSetPreviousTotal();
+            currentPage = 1;
+        });
         swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
         RcvAdapterWrapper rcvAdapterWrapper = new RcvAdapterWrapper(new CommonRcvAdapter<ZHStoriesBean>(zhStoriesBeanList) {
             @NonNull
             @Override
             public AdapterItem createItem(Object o) {
                 return new ZHNewsItem(getActivity());
             }
-        }, new LinearLayoutManager(getContext()));
+        }, linearLayoutManager);
 
 
         headerView = View.inflate(getContext(), R.layout.header_zhihu_list, null);
@@ -111,35 +126,30 @@ public class ZhihuFragment extends MvpFragment<ZhihuPresenter> implements ZhihuV
         rcvAdapterWrapper.setHeaderView(headerView);
         recyclerView.setAdapter(rcvAdapterWrapper);
 
+
+        endlessRecyclerOnScrollListener = new EndlessRecyclerOnScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int curPage) {
+                LogUtils.e(curPage);
+                currentPage++;
+                mPresenter.getZHNews(currentPage);
+            }
+        };
+
+        recyclerView.addOnScrollListener(endlessRecyclerOnScrollListener);
+
+
         banner.setOnBannerListener(position -> {
             if (zhTopStoriesBeen == null) return;
             Intent intent = new Intent(getActivity(), ZHInfoActivity.class);
             intent.putExtra("ZH_ID", zhTopStoriesBeen.get(position).getId() + "");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                getActivity().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(), Pair.create(getView(position), "image")).toBundle());
+                getActivity().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity(), Pair.create(banner.getmCurrentImgView(), "image")).toBundle());
             } else {
                 getActivity().startActivity(intent);
             }
         });
 
-    }
-
-    /**
-     * 通过反射获取banner中的子View
-     * @param position
-     * @return
-     */
-    private ImageView getView(int position) {
-        Class<Banner> cls = (Class<Banner>) banner.getClass();
-        try {
-            Field imageViews = cls.getDeclaredField("imageViews");
-            imageViews.setAccessible(true);
-            if (imageViews.get(banner) != null)
-                return (ImageView) ((List<View>) imageViews.get(banner)).get(position);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 
@@ -171,6 +181,7 @@ public class ZhihuFragment extends MvpFragment<ZhihuPresenter> implements ZhihuV
 
     @Override
     public void refreshZHNews(List<ZHStoriesBean> zhStoriesBeen) {
+
         layoutEmpty.setVisibility(View.GONE);
         zhStoriesBeanList.clear();
         zhStoriesBeanList.addAll(zhStoriesBeen);
@@ -186,6 +197,12 @@ public class ZhihuFragment extends MvpFragment<ZhihuPresenter> implements ZhihuV
     public void refreshTopNews(List<String> images, List<String> titles) {
         banner.update(images, titles);
         banner.start();
+    }
+
+    @Override
+    public void loadMoreZHNews(List<ZHStoriesBean> zhStoriesBeen) {
+        zhStoriesBeanList.addAll(zhStoriesBeen);
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     @Override

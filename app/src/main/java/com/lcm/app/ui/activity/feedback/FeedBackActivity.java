@@ -67,6 +67,7 @@ public class FeedBackActivity extends BaseActivity {
     EditText edtFeedBack;
     private String picPath;
     private KProgressHUD hud;
+    protected View snackBarRootView;
 
     @Override
     protected int rootView() {
@@ -84,6 +85,8 @@ public class FeedBackActivity extends BaseActivity {
         Drawable upArrow = ContextCompat.getDrawable(this, R.drawable.abc_ic_ab_back_material);
         upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
+        snackBarRootView = findViewById(android.R.id.content);
 
     }
 
@@ -151,8 +154,11 @@ public class FeedBackActivity extends BaseActivity {
             @Override
             public void onCommentsFetch(List<Comment> list, AVException e) {
                 hideLoading();
-                ToastUtils.showShort("感谢您的反馈！（*＾ワ＾*）");
-                finish();
+                SnackbarUtils.with(snackBarRootView)
+                        .setMessage("感谢您的反馈！（*＾ワ＾*）")
+                        .setAction("关闭", v -> finish())
+                        .setDuration(SnackbarUtils.LENGTH_LONG)
+                        .showSuccess();
             }
         });
     }

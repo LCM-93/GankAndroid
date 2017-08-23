@@ -1,1 +1,1 @@
-include ':mvpbase', ":app"
+include ':mvpbase', ":app", ':banner'

@@ -1,6 +1,7 @@
 package com.lcm.app.ui.activity.main;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
@@ -27,6 +28,7 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.feedback.FeedbackAgent;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.SnackbarUtils;
 import com.bumptech.glide.Glide;
 import com.lcm.app.R;
 import com.lcm.app.base.MvpActivity;
@@ -48,9 +50,11 @@ import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 
@@ -265,10 +269,26 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
             case R.id.menu_logout:
                 drawerLayout.closeDrawers();
-                isLogin = false;
-                SPUtils.getInstance(Contract.SPNAME).put(Contract.ISLOGIN, false);
-                EventBus.getDefault().post("Logout", "Logout");
-                updateUserInfo();
+                if (!isLogin) {
+                    SnackbarUtils.with(getSankBarRootView())
+                            .setDuration(SnackbarUtils.LENGTH_LONG)
+                            .setMessage("你没登录 乱点个啥 ヽ(‘⌒´メ)ノ")
+                            .setMessageColor(getResources().getColor(R.color.white))
+                            .setBgColor(getResources().getColor(R.color.colorPrimary))
+                            .show();
+                } else {
+                    isLogin = false;
+                    SnackbarUtils.with(getSankBarRootView())
+                            .setDuration(SnackbarUtils.LENGTH_LONG)
+                            .setMessage("退出登录咯 ┐(´-｀)┌")
+                            .setMessageColor(getResources().getColor(R.color.white))
+                            .setBgColor(getResources().getColor(R.color.colorPrimary))
+                            .show();
+
+                    SPUtils.getInstance(Contract.SPNAME).put(Contract.ISLOGIN, false);
+                    EventBus.getDefault().post("Logout", "Logout");
+                    updateUserInfo();
+                }
                 break;
 
 
@@ -276,6 +296,26 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         return false;
     }
 
+    private boolean prepareExit = false;
+
+    @Override
+    public void onBackPressed() {
+        drawerLayout.closeDrawers();
+        if (!prepareExit) {
+            prepareExit = true;
+            SnackbarUtils.with(getSankBarRootView())
+                    .setDuration(SnackbarUtils.LENGTH_LONG)
+                    .setMessage("再按一次退出程序～")
+                    .setMessageColor(getResources().getColor(R.color.white))
+                    .setBgColor(Color.parseColor("#aa000000"))
+                    .show();
+
+            Observable.timer(3000, TimeUnit.MILLISECONDS)
+                    .subscribe(aLong -> prepareExit = false, Throwable::printStackTrace);
+        } else {
+            finish();
+        }
+    }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
