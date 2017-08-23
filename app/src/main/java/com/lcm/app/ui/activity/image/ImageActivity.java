@@ -19,6 +19,7 @@ import com.lcm.android.base.BaseActivity;
 import com.lcm.app.R;
 import com.lcm.app.service.DownLoadService;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.BindView;
 
@@ -128,4 +129,16 @@ public class ImageActivity extends BaseActivity implements Toolbar.OnMenuItemCli
         return false;
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 }

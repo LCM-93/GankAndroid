@@ -11,6 +11,7 @@ import com.lcm.android.mvp.BaseMvpPresenter;
 import com.lcm.android.mvp.BaseView;
 import com.lcm.app.MyApplication;
 import com.lcm.app.dagger.component.AppComponent;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * ****************************************************************
@@ -70,5 +71,18 @@ public abstract class MvpActivity<P extends BaseMvpPresenter>  extends BaseMvpAc
     @Override
     public View getSankBarRootView(){
         return snackBarRootView;
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

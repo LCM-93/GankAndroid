@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 
 import com.lcm.android.base.BaseActivity;
 import com.lcm.app.R;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.BindView;
 
@@ -160,5 +161,17 @@ public class WebActivity extends BaseActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

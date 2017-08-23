@@ -33,6 +33,7 @@ import com.lcm.android.base.BaseActivity;
 import com.lcm.app.R;
 import com.lcm.app.data.Contract;
 import com.lcm.app.utils.MediaUtility;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
 import java.util.List;
@@ -214,5 +215,17 @@ public class FeedBackActivity extends BaseActivity {
 
     public void hideLoading() {
         if (hud != null && hud.isShowing()) hud.dismiss();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

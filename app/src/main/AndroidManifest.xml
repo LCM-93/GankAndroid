@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lcm.app">
 
+    <uses-sdk android:minSdkVersion="15"></uses-sdk>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -87,6 +89,13 @@
             android:screenOrientation="portrait">
 
         </activity>
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="599d2aea3eae2507c7001805" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="UMENG" />
 
     </application>
 
