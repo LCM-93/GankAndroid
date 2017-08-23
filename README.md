@@ -4,6 +4,13 @@
 
 撸一个干货客户端
 
+练练手的项目，写了这么久Android，都没有真正用过 Material Design，惭愧啊，毕竟国内有多少Android 程序猿不是拿着IOS的设计稿开发呢，哎。。。。
+所以项目中尽量使用Material Design 的风格，但是写完之后还是感觉不太满意，有点生硬。
+
+同时项目使用最流行（烂大街）的 Rxjava+Retrofit+MVP+Dagger 架构搭建，有兴趣的同学可以看看，里面也有自己参考各位大神的项目封装的一个BaseMvp，封装了MVP的一些基础架构代码。
+
+下载链接：[https://fir.im/6l9r](https://fir.im/6l9r)
+
 ## 技术
 
 1. Rxjava+Retrofit+MVP 架构
@@ -40,6 +47,14 @@
 
 ## 更新记录
 
-V1.0.0
+### V1.0.0
 
 完成《干货集中营》初版
+
+
+
+## 关于我
+
+1. [晨鸣的博客](http://lichenming.com)
+2. [Github](https://github.com/lichenming0516)
+
