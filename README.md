@@ -1,13 +1,13 @@
 # 干货集中营
 
-<img src="https://github.com/lichenming0516/GankAndroid/blob/master/img/ic_launcher.png?raw=true" width="100" />
+<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/blob/master/img/ic_launcher.png?raw=true" width="100" />
 
 撸一个干货客户端
 
 练练手的项目，写了这么久Android，都没有真正用过 Material Design，惭愧啊，毕竟国内有多少Android 程序猿不是拿着IOS的设计稿开发呢，哎。。。。
 所以项目中尽量使用Material Design 的风格，但是写完之后还是感觉不太满意，有点生硬。
 
-同时项目使用最流行（烂大街）的 Rxjava+Retrofit+MVP+Dagger 架构搭建，有兴趣的同学可以看看，里面也有自己参考各位大神的项目封装的一个BaseMvp，封装了MVP的一些基础架构代码。
+同时项目使用最流行（烂大街）的 Rxjava+Retrofit+MVP+Dagger 架构搭建，有兴趣的同学可以看看，里面也有自己参考各位大神的项目封装的一个MVPBase，封装了MVP的一些基础架构代码。
 
 下载链接：[https://fir.im/6l9r](https://fir.im/6l9r)
 
