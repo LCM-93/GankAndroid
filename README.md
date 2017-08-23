@@ -22,20 +22,22 @@
 
 ## 效果图
 
-<figure class="half">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/1.png" width="200">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/2.png" width="200">
-</figure>
+<table><tr>
+<td><img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/1.png" width="200"></td>
+<td><img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/2.png" width="200"></td>
+</tr></table>
 
-<figure class="half">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/3.png" width="200">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/4.png" width="200">
-</figure>
+<table><tr>
+<td><img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/3.png" width="200"></td>
+<td><img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/4.png" width="200"></td>
+</tr></table>
 
-<figure class="half">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/5.png" width="200">
-	<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/6.png" width="200">
-</figure>
+
+<table><tr>
+<td><img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/5.png" width="200"></td>
+<td><img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/6.png" width="200"></td>
+</tr></table>
+
 
 
 
