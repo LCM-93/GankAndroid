@@ -82,6 +82,7 @@ public class GankWelfareItem implements AdapterItem<GankBean> {
                 .bitmapTransform(new RoundedCornersTransformation(context, (int) DeviceUtils.dpToPixel(context, 8), 0))
                 .error(R.mipmap.iv_place_holder)
                 .placeholder(R.mipmap.iv_place_holder)
+                .dontAnimate()
                 .into(ivImage);
     }
 }
