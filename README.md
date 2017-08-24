@@ -1,6 +1,6 @@
 # 干货集中营
 
-<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/blob/master/img/ic_launcher.png?raw=true" width="100" />
+<img src="https://raw.githubusercontent.com/lichenming0516/GankAndroid/master/img/ic_launcher.png" width="100" />
 
 撸一个干货客户端
 
