@@ -40,14 +40,14 @@ public class ClientModule {
     public GlobeHttpHandler mHandler;
     public Interceptor[] mInterceptors;
 
-    public ClientModule(Buidler buidler) {
-        this.mApiUrl = buidler.apiUrl;
-        this.mHandler = buidler.handler;
-        this.mInterceptors = buidler.interceptors;
+    public ClientModule(Builder builder) {
+        this.mApiUrl = builder.apiUrl;
+        this.mHandler = builder.handler;
+        this.mInterceptors = builder.interceptors;
     }
 
-    public static Buidler buidler() {
-        return new Buidler();
+    public static Builder builder() {
+        return new Builder();
     }
 
 
@@ -136,25 +136,25 @@ public class ClientModule {
     }
 
 
-    public static class Buidler {
+    public static class Builder {
         private HttpUrl apiUrl = null;
         private GlobeHttpHandler handler;
         private Interceptor[] interceptors;
 
-        public Buidler() {
+        public Builder() {
         }
 
-        public Buidler baseurl(String baseurl) {//基础url
+        public Builder baseurl(String baseurl) {//基础url
             this.apiUrl = HttpUrl.parse(baseurl);
             return this;
         }
 
-        public Buidler globeHttpHandler(GlobeHttpHandler handler) {//用来处理http响应结果
+        public Builder globeHttpHandler(GlobeHttpHandler handler) {//用来处理http响应结果
             this.handler = handler;
             return this;
         }
 
-        public Buidler interceptors(Interceptor[] interceptors) {//动态添加任意个interceptor
+        public Builder interceptors(Interceptor[] interceptors) {//动态添加任意个interceptor
             this.interceptors = interceptors;
             return this;
         }

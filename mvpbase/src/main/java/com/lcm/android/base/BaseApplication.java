@@ -30,7 +30,7 @@ public abstract class BaseApplication extends Application {
         super.onCreate();
         mApplication = this;
         mClientModule = ClientModule
-                .buidler()
+                .builder()
                 .baseurl(getBaseUrl())
                 .globeHttpHandler(getHttpHandler())
                 .interceptors(getInterceptors())
