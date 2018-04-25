@@ -19,11 +19,13 @@ android {
     }
     buildTypes {
         release {
-
+            minifyEnabled false
+            buildConfigField "String","BaseUrl",'"http://gank.io/api/"'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-
+            minifyEnabled false
+            buildConfigField "String","BaseUrl",'"http://gank.io/api/"'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

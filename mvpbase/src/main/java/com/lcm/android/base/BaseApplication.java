@@ -3,6 +3,7 @@ package com.lcm.android.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.lcm.android.BuildConfig;
 import com.lcm.android.dagger.module.AppModule;
 import com.lcm.android.dagger.module.ClientModule;
 import com.lcm.android.http.GlobeHttpHandler;
@@ -31,7 +32,7 @@ public abstract class BaseApplication extends Application {
         mApplication = this;
         mClientModule = ClientModule
                 .builder()
-                .baseurl(getBaseUrl())
+                .baseurl(BuildConfig.BaseUrl)
                 .globeHttpHandler(getHttpHandler())
                 .interceptors(getInterceptors())
                 .build();
@@ -49,12 +50,6 @@ public abstract class BaseApplication extends Application {
     }
 
 
-    /**
-     * 提供基础url给retrofit
-     *
-     * @return
-     */
-    protected abstract String getBaseUrl();
 
     public ClientModule getClientModule() {
         return mClientModule;
